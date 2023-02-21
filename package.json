@@ -1,0 +1,43 @@
+{
+  "name": "expo-divkit",
+  "version": "0.1.0",
+  "description": "divkit render library",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "open -a \"Xcode\" example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "expo-divkit",
+    "ExpoDivKit"
+  ],
+  "repository": "https://github.com/r-pulatov/expo-divkit",
+  "bugs": {
+    "url": "https://github.com/r-pulatov/expo-divkit/issues"
+  },
+  "author": "r.pulatov@solutionfactory.ru <r.pulatov@solutionfactory.ru> (https://github.com/r-pulatov)",
+  "license": "MIT",
+  "homepage": "https://github.com/r-pulatov/expo-divkit#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-native": "^0.70.6",
+    "expo-module-scripts": "^3.0.4",
+    "expo-modules-core": "^1.1.0"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}
