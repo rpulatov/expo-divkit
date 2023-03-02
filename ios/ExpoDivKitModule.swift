@@ -10,6 +10,9 @@ public class ExpoDivKitModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoDivKit')` in JavaScript.
     Name("ExpoDivKit")
 
+    Function("getTheme") { () -> String in
+      "system"
+
     // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
     Constants([
       "PI": Double.pi
