@@ -4,22 +4,27 @@ import DivKit
 import Serialization
 import TemplatesSupport
 
+extension String: Error {}
+
 public struct DivJson: Deserializable {
   public let templates: [String: Any]
-  public let cards: [[String: Any]]
+  public let card: [String: Any]
 
   public init(dictionary: [String: Any]) throws {
     templates = try dictionary.getOptionalField("templates") ?? [:]
-    cards = try dictionary.getArray("cards")
+    card = try dictionary.getOptionalField("card") ?? [:]
   }
 
   static func loadCards(jsonData: [String: Any]) throws -> [DivData] {
     let divJson = try DivJson(dictionary: jsonData)
-    return divJson.cards.compactMap {
-      DivData.resolve(
-        card: $0,
+      
+    let divData = DivData.resolve(
+        card: divJson.card,
         templates: divJson.templates
-      ).value
-    }
+    ).value
+      
+    if (divData == nil) { throw "Not resolved card"}
+        
+    return [divData!]
   }
 }

@@ -37,7 +37,9 @@ export default function App() {
       style={styles.container}
     >
       <View style={styles.container}>
-        {json ? <ExpoDivKitView style={{ width: "100%" }} json={json} /> : null}
+        {json ? (
+          <ExpoDivKitView style={{ width: "100%", height: 500 }} json={json} />
+        ) : null}
         <View style={styles.footer}>
           <Text>FOOTERS</Text>
         </View>
