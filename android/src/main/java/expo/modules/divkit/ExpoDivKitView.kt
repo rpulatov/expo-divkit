@@ -24,8 +24,6 @@ import org.json.JSONObject
 
 class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext),
     View.OnLayoutChangeListener {
-    private val assetReader = AssetReader(context)
-
     private var mainView: MainDivView
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
