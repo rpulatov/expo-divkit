@@ -88,6 +88,9 @@ repositories {
 dependencies {
   implementation project(':expo-modules-core')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${getKotlinVersion()}"
+
+  implementation 'com.facebook.react:react-native:+'
+  
   implementation 'com.yandex.div:div-core:3.0.1'
   implementation 'com.yandex.div:div:3.0.1'
   implementation 'com.yandex.div:div-json:3.0.1'

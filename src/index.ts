@@ -8,7 +8,7 @@ import {
 // and on native platforms to ExpoDivKit.ts
 import { ChangeEventPayload, ExpoDivKitViewProps } from "./ExpoDivKit.types";
 import ExpoDivKitModule from "./ExpoDivKitModule";
-import ExpoDivKitView from "./ExpoDivKitView";
+import { ExpoDivKitView, initCustomComponent } from "./ExpoDivKitView";
 
 // Get the native constant value.
 export const PI = ExpoDivKitModule.PI;
@@ -35,4 +35,9 @@ export function addChangeListener(
   return emitter.addListener<ChangeEventPayload>("onChange", listener);
 }
 
-export { ExpoDivKitView, ExpoDivKitViewProps, ChangeEventPayload };
+export {
+  ExpoDivKitView,
+  ExpoDivKitViewProps,
+  ChangeEventPayload,
+  initCustomComponent,
+};

@@ -4,6 +4,10 @@ import com.facebook.react.bridge.ReadableMap
 import org.json.JSONObject
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import expo.modules.core.arguments.MapArguments
+import expo.modules.core.ModuleRegistry
+import expo.modules.core.Promise
+import expo.modules.core.ViewManager
 
 class ExpoDivKitModule : Module() {
   // Each module class must implement the definition function. The definition consists of components
@@ -48,6 +52,11 @@ class ExpoDivKitModule : Module() {
       Prop("json") { view: ExpoDivKitView, json: ReadableMap ->
         view.updateView(JSONObject(json.toHashMap()))
       }
+
+      Prop("custom") { view: ExpoDivKitView, custom: ReadableMap ->
+        print("fff")
+      }
+
     }
   }
 }

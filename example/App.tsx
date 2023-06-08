@@ -1,25 +1,29 @@
-import * as ExpoDivKit from "expo-divkit";
+import { ExpoDivKitView, initCustomComponent } from "expo-divkit";
 import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View, Text } from "react-native";
 
 import jsonFile from "./div_json.json";
+
+function TestViewComponent() {
+  return <View style={styles.view} />;
+}
+
+initCustomComponent("test", TestViewComponent);
 
 export default function App() {
   const [json, setJson] = React.useState<object | null>(jsonFile);
 
   return (
     <Pressable
-      onPress={() => (json ? setJson(null) : setJson(jsonFile))}
+      onPress={() => null /* (json ? setJson(null) : setJson(jsonFile))*/}
       style={styles.container}
     >
       <View style={styles.container}>
         {json ? (
-          <ExpoDivKit.ExpoDivKitView
+          <ExpoDivKitView
             style={{ flex: 1, backgroundColor: "purple" }}
             json={json}
-          >
-            <View style={styles.view} />
-          </ExpoDivKit.ExpoDivKitView>
+          />
         ) : null}
       </View>
     </Pressable>

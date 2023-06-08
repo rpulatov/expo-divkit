@@ -6,6 +6,15 @@ import { ExpoDivKitViewProps } from "./ExpoDivKit.types";
 const NativeView: React.ComponentType<ExpoDivKitViewProps> =
   requireNativeViewManager("ExpoDivKit");
 
-export default function ExpoDivKitView(props: ExpoDivKitViewProps) {
+const customComponents = new Map<string, () => React.ReactElement>();
+
+export function initCustomComponent(
+  customType: string,
+  component: () => React.ReactElement
+) {
+  customComponents.set(customType, component);
+}
+
+export function ExpoDivKitView(props: ExpoDivKitViewProps) {
   return <NativeView {...props} />;
 }
