@@ -17,17 +17,18 @@
   },
   "keywords": [
     "react-native",
+    "divkit",
     "expo",
     "expo-divkit",
     "ExpoDivKit"
   ],
-  "repository": "https://github.com/r-pulatov/expo-divkit",
+  "repository": "https://github.com/rpulatov/expo-divkit",
   "bugs": {
-    "url": "https://github.com/r-pulatov/expo-divkit/issues"
+    "url": "https://github.com/rpulatov/expo-divkit/issues"
   },
-  "author": "r.pulatov@solutionfactory.ru <r.pulatov@solutionfactory.ru> (https://github.com/r-pulatov)",
+  "author": "r.pulatov@solutionfactory.ru <r.pulatov@solutionfactory.ru> (https://github.com/rpulatov)",
   "license": "MIT",
-  "homepage": "https://github.com/r-pulatov/expo-divkit#readme",
+  "homepage": "https://github.com/rpulatov/expo-divkit#readme",
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-native": "^0.70.6",
