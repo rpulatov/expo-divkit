@@ -1,5 +1,7 @@
 package expo.modules.divkit
 
+import com.facebook.react.bridge.ReadableMap
+import org.json.JSONObject
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
@@ -43,8 +45,8 @@ class ExpoDivKitModule : Module() {
     // the view definition: Prop, Events.
     View(ExpoDivKitView::class) {
       // Defines a setter for the `name` prop.
-      Prop("name") { view: ExpoDivKitView, prop: String ->
-        println(prop)
+      Prop("json") { view: ExpoDivKitView, json: ReadableMap ->
+        view.updateView(JSONObject(json.toHashMap()))
       }
     }
   }

@@ -1,5 +1,7 @@
 package expo.modules.divkit
 
+
+import org.json.JSONObject
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -31,6 +33,11 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
             .supportHyphenation(true)
             .visualErrorsEnabled(true)
             .build()
+  }
+
+  fun updateView(jsonData: JSONObject) {
+    val templatesJson = jsonData.optJSONObject("templates")
+    val cardsJson = jsonData.getJSONArray("cards")
   }
 
   init {
