@@ -37,7 +37,7 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     private fun createDivConfiguration(): DivConfiguration {
         return DivConfiguration.Builder(DemoDivImageLoader(context))
             .actionHandler(DemoDivActionHandler())
-            .divCustomViewAdapter(CustomViewAdapter())
+            .divCustomContainerViewAdapter(CustomViewAdapter())
             .supportHyphenation(true)
             .visualErrorsEnabled(true)
             .build()
