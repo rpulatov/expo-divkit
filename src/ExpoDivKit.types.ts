@@ -5,5 +5,13 @@ export type ChangeEventPayload = {
 };
 
 export type ExpoDivKitViewProps = {
-  json: { [key: string]: any };
+  json: { templates: { [key: string]: any }; card: { [key: string]: any } };
 } & ViewProps;
+
+export type NativeViewProps = ExpoDivKitViewProps & {
+  onRenderCustomViewRequested: (e: EventRenderCustomViewRequested) => void;
+};
+
+export type EventRenderCustomViewRequested = {
+  nativeEvent: { nativeViewId: string; customType: string };
+};

@@ -1,21 +1,25 @@
 package expo.modules.divkit
 
+import android.view.View
 import com.facebook.react.bridge.ReadableMap
-import org.json.JSONObject
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
-import expo.modules.core.arguments.MapArguments
-import expo.modules.core.ModuleRegistry
-import expo.modules.core.Promise
-import expo.modules.core.ViewManager
+import org.json.JSONObject
 
 class ExpoDivKitModule : Module() {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
+
+  // private val context: Context
+  //   get() = requireNotNull(appContext.reactContext) { "React Application Context is null" }
+
+  // private val currentActivity
+  //   get() = appContext.activityProvider?.currentActivity ?: throw
+  // MissingCurrentActivityException()
+
   override fun definition() = ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
+    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a
+    // string as an argument.
+    // Can be inferred from module's class name, but it's recommended to set it explicitly for
+    // clarity.
     // The module will be accessible from `requireNativeModule('ExpoDivKit')` in JavaScript.
     Name("ExpoDivKit")
 
@@ -23,40 +27,36 @@ class ExpoDivKitModule : Module() {
       return@Function "system"
     }
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants(
-      "PI" to Math.PI
-    )
+    // Sets constant properties on the module. Can take a dictionary or a closure that returns a
+    // dictionary.
+    Constants("PI" to Math.PI)
 
     // Defines event names that the module can send to JavaScript.
     Events("onChange")
 
     // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      "Hello world! 👋"
-    }
+    Function("hello") { "Hello world! 👋" }
 
     // Defines a JavaScript function that always returns a Promise and whose native code
     // is by default dispatched on the different thread than the JavaScript runtime runs on.
     AsyncFunction("setValueAsync") { value: String ->
       // Send an event to JavaScript.
-      sendEvent("onChange", mapOf(
-        "value" to value
-      ))
+      sendEvent("onChange", mapOf("value" to value))
     }
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
-    View(ExpoDivKitView::class) {
-      // Defines a setter for the `name` prop.
+    View(
+        ExpoDivKitView::class,
+    ) {
       Prop("json") { view: ExpoDivKitView, json: ReadableMap ->
         view.updateView(JSONObject(json.toHashMap()))
       }
 
-      Prop("custom") { view: ExpoDivKitView, custom: ReadableMap ->
-        print("fff")
-      }
+      // Prop("customViews") { view: ExpoDivKitView, customViews: ReadableArray? ->
+      //   val reactNativeViewId = requireNotNull(customViews).getInt(0)
+      //   view.createFragment(reactNativeViewId)
+      // }
 
+      Events("onRenderCustomViewRequested")
     }
   }
 }

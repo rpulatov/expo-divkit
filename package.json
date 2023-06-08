@@ -28,7 +28,6 @@
   "author": "r.pulatov@solutionfactory.ru <r.pulatov@solutionfactory.ru> (https://github.com/r-pulatov)",
   "license": "MIT",
   "homepage": "https://github.com/r-pulatov/expo-divkit#readme",
-  "dependencies": {},
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-native": "^0.70.6",

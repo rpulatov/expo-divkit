@@ -13,23 +13,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-internal class DivViewFactory(
-    private val context: Div2Context,
-    private val templatesJson: JSONObject? = null
-) {
-
-    private val environment = DivParsingEnvironment(ParsingErrorLogger.ASSERT).apply {
-        if (templatesJson != null) parseTemplates(templatesJson)
-    }
-
-    fun createView(cardJson: JSONObject): Div2View {
-        val divData = DivData(environment, cardJson)
-        return Div2View(context).apply {
-            setData(divData, DivDataTag(divData.logId))
-        }
-    }
-}
-
 internal class DivListAdapter(
     private val context: Div2Context,
     private val templatesJson: JSONObject? = null,
@@ -40,6 +23,7 @@ internal class DivListAdapter(
         if (templatesJson != null) parseTemplates(templatesJson)
     }
 
+    // create view by same cards
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DivViewHolder {
         val view = Div2View(context).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -50,6 +34,7 @@ internal class DivListAdapter(
         return DivViewHolder(view, parsingEnvironment)
     }
 
+    //  get data by array index
     override fun onBindViewHolder(holder: DivViewHolder, position: Int) {
         holder.bindJsonToView(cardsJson.getJSONObject(position))
     }
@@ -57,6 +42,7 @@ internal class DivListAdapter(
     override fun getItemCount(): Int = cardsJson.length()
 }
 
+// bind data to view
 internal class DivViewHolder(
     private val divView: Div2View,
     private val parsingEnvironment: DivParsingEnvironment
