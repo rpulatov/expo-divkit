@@ -4,8 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>{ExpoDivKit.hello()}</Text>
-      <Text>Theme: {ExpoDivKit.getTheme()}</Text>
       <ExpoDivKit.ExpoDivKitView
         name="testName"
         style={{ flex: 1, backgroundColor: "purple" }}

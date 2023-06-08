@@ -12,6 +12,24 @@ import com.yandex.div2.DivData
 import org.json.JSONArray
 import org.json.JSONObject
 
+
+internal class DivViewFactory(
+    private val context: Div2Context,
+    private val templatesJson: JSONObject? = null
+) {
+
+    private val environment = DivParsingEnvironment(ParsingErrorLogger.ASSERT).apply {
+        if (templatesJson != null) parseTemplates(templatesJson)
+    }
+
+    fun createView(cardJson: JSONObject): Div2View {
+        val divData = DivData(environment, cardJson)
+        return Div2View(context).apply {
+            setData(divData, DivDataTag(divData.logId))
+        }
+    }
+}
+
 internal class DivListAdapter(
     private val context: Div2Context,
     private val templatesJson: JSONObject? = null,
