@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <Pressable
-      onPress={() => null /* (json ? setJson(null) : setJson(jsonFile))*/}
+      onPress={() => (json ? setJson(null) : setJson(jsonFile))}
       style={styles.container}
     >
       <View style={styles.container}>

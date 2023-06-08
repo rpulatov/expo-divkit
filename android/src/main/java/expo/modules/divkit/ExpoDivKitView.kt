@@ -21,6 +21,8 @@ import com.yandex.div2.DivAction
 
 class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
   private val assetReader = AssetReader(context)
+  private val recyclerView: RecyclerView
+  private val divContext: Div2Context
 
   class DemoDivActionHandler: DivActionHandler() {
         override fun handleAction(action: DivAction, view: DivViewFacade): Boolean {
@@ -40,26 +42,15 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     val templatesJson = jsonData.optJSONObject("templates")
     val cardsJson = jsonData.getJSONArray("cards")
 
-    val contextWrapper = ContextThemeWrapper(context, context.theme)
-    val recyclerView = RecyclerView(contextWrapper);
-
-    val divContext = Div2Context(baseContext = contextWrapper, configuration = createDivConfiguration())
-    val listAdapter = DivListAdapter(divContext, templatesJson, cardsJson)
-
-    recyclerView.apply {
-      layoutManager = LinearLayoutManager(contextWrapper)
-      adapter = listAdapter
-    }
-
-    addView(recyclerView)
+    recyclerView.adapter = DivListAdapter(divContext, templatesJson, cardsJson)
   }
 
   init {
-
+    val contextWrapper = ContextThemeWrapper(context, context.theme)
+    divContext = Div2Context(baseContext = contextWrapper, configuration = createDivConfiguration())
+    recyclerView = RecyclerView(contextWrapper);
+    recyclerView.layoutManager = LinearLayoutManager(contextWrapper)  
     
-
-    
-    
-    
+    addView(recyclerView)
   }
 }
