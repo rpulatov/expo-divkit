@@ -21,7 +21,7 @@ export type ExpoDivKitViewProps = {
 export type ExpoDivKitViewState = {
   indexedJson?: DivKitJson;
   customViews: CustomViewState[];
-  rootViewHeight: number;
+  rootViewHeight?: number | string;
 };
 
 export type NativeViewProps = ExpoDivKitViewProps & {

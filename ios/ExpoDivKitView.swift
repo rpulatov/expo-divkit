@@ -69,7 +69,7 @@ final class ExpoDivKitView: ExpoView {
         }
     }
     
-    public func getCusomViewById(customViewId: String) -> RCTView? {
+    public func getCustomViewById(customViewId: String) -> RCTView? {
         customViewCollection[customViewId]
     }
     

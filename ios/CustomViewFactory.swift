@@ -18,7 +18,7 @@ struct CustomViewFactory: DivCustomBlockFactory {
     ) -> Block {
         
         if let nativeViewId = data.data["nativeViewId"] as? String {
-            if let customView = requester.getCusomViewById(customViewId: nativeViewId) {
+            if let customView = requester.getCustomViewById(customViewId: nativeViewId) {
                 return CustomBlock(
                     view: customView,
                     widthTrait: data.widthTrait,
