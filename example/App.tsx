@@ -1,6 +1,6 @@
 import { ExpoDivKitView, initCustomComponent } from "expo-divkit";
 import React from "react";
-import { Pressable, StyleSheet, View, Text } from "react-native";
+import { Pressable, StyleSheet, View, Text, ScrollView } from "react-native";
 
 import jsonFile from "./div_json.json";
 
@@ -35,7 +35,7 @@ export default function App() {
   const [json, setJson] = React.useState<typeof jsonFile | null>(jsonFile);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {json ? <ExpoDivKitView json={json} /> : null}
 
       <Pressable
@@ -44,7 +44,7 @@ export default function App() {
       >
         <Text>SHOW/HIDEddd</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 }
 

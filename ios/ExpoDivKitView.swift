@@ -65,7 +65,7 @@ final class ExpoDivKitView: ExpoView {
     public func updateView(jsonData: [String: Any]) {
         if let card = try? DivJson.loadCard(jsonData: jsonData) {
             cardData = card
-            updateStateByData(card)
+            reloadCard()
         }
     }
     
@@ -74,8 +74,12 @@ final class ExpoDivKitView: ExpoView {
     }
     
     public func onCustomViewRendered() {
+        reloadCard()
+    }
+    
+    private func reloadCard() {
         if let card = cardData {
-            updateStateByData(card)
+            updateStateByData(card, cachedImageHolders: state?.block.getImageHolders() ?? [])
         }
     }
     
@@ -106,7 +110,7 @@ extension ExpoDivKitView: UIActionEventPerforming {
         switch event.payload {
         case let .divAction(params):
             components.handleActions(params: params)
-            //       divHostView.reloadItem(cardId: params.cardId)
+            reloadCard()
         case .empty,
                 .url,
                 .menu,
