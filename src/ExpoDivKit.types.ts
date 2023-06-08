@@ -1,17 +1,39 @@
-import { ViewProps } from "react-native";
+import { ViewProps, View, NativeSyntheticEvent } from "react-native";
 
 export type ChangeEventPayload = {
   value: string;
 };
 
+export type DivKitJson = {
+  templates: { [key: string]: any };
+  card: { [key: string]: any };
+};
+
+export type CustomViewState = {
+  nativeViewId: string;
+  customType: string;
+};
+
 export type ExpoDivKitViewProps = {
-  json: { templates: { [key: string]: any }; card: { [key: string]: any } };
-} & ViewProps;
+  json: DivKitJson;
+} & React.ComponentProps<typeof View>;
+
+export type ExpoDivKitViewState = {
+  indexedJson?: DivKitJson;
+  customViews: CustomViewState[];
+  rootViewHeight: number;
+};
 
 export type NativeViewProps = ExpoDivKitViewProps & {
-  onRenderCustomViewRequested: (e: EventRenderCustomViewRequested) => void;
+  onHeightChanged: (e: EventHeightChanged) => void;
+  ы;
 };
 
-export type EventRenderCustomViewRequested = {
-  nativeEvent: { nativeViewId: string; customType: string };
-};
+export type EventRenderCustomViewRequested = NativeSyntheticEvent<{
+  nativeViewId: string;
+  customType: string;
+}>;
+
+export type EventHeightChanged = NativeSyntheticEvent<{ height: number }>;
+
+export type CustomViewComponent = React.ComponentClass<{ nativeID: string }>;

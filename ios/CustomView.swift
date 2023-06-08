@@ -7,10 +7,6 @@ final class CustomView: BlockView {
         
     }
     
-    var effectiveBackgroundColor: UIColor?
-        
-    
-    public func setTag(tag: Int) {
-        self.tag = tag
-    }
+    let effectiveBackgroundColor: UIColor? = nil
 }
+

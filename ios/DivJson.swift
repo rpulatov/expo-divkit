@@ -15,7 +15,7 @@ public struct DivJson: Deserializable {
     card = try dictionary.getOptionalField("card") ?? [:]
   }
 
-  static func loadCards(jsonData: [String: Any]) throws -> [DivData] {
+  static func loadCard(jsonData: [String: Any]) throws -> DivData {
     let divJson = try DivJson(dictionary: jsonData)
       
     let divData = DivData.resolve(
@@ -25,6 +25,6 @@ public struct DivJson: Deserializable {
       
     if (divData == nil) { throw "Not resolved card"}
         
-    return [divData!]
+    return divData!
   }
 }

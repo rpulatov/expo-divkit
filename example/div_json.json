@@ -198,6 +198,7 @@
         "state_id": 0,
         "div": {
           "type": "container",
+          "orientation": "vertical",
           "background": [
             {
               "type": "solid",
@@ -206,69 +207,44 @@
           ],
           "items": [
             {
+              "type": "text",
+              "text_color": "#ffffff",
+              "height": {
+                "type": "fixed",
+                "value": 100
+              },
+              "paddings": {
+                "left": 16,
+                "right": 16,
+                "bottom": 16
+              },
+              "text_alignment_vertical": "bottom",
+              "font_size": 15,
+              "line_height": 20,
+              "background": [
+                {
+                  "type": "gradient",
+                  "colors": ["#999", "#000"],
+                  "angle": 270
+                }
+              ],
+              "text": "test"
+            },
+            {
+              "id": "9999999",
+              "type": "custom",
+              "custom_type": "demo_custom"
+            },
+            {
               "type": "habr_card",
               "avatar": "https://habrastorage.org/r/w32/getpro/habr/avatars/fc3/f8c/b5f/fc3f8cb5ff62a37139359296fcb2626a.jpg",
               "username": "svipy",
               "time": "14 июля в 10:57",
-              "title": "Пишем 111 sонлайн-тренажёр для Python, C++ и Go: опыт Практикума",
+              "title": "Пишем sонлайн-тренажёр для Python, C++ и Go: опыт Практикума",
               "votes": "+21",
               "comments": "4",
               "views": "6.9K",
               "favorites": "39"
-            },
-            {
-              "type": "container",
-              "background": [
-                {
-                  "type": "solid",
-                  "color": "#d6409f"
-                }
-              ],
-              "items": [
-                {
-                  "type": "custom",
-                  "custom_type": "demo_custom",
-                  "padding": {
-                    "top": 10,
-                    "right": 0,
-                    "bottom": 10,
-                    "left": 0
-                  },
-                  "background": [
-                    {
-                      "type": "solid",
-                      "color": "#3dff07"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "container",
-              "background": [
-                {
-                  "type": "solid",
-                  "color": "#d6409f"
-                }
-              ],
-              "items": [
-                {
-                  "type": "custom",
-                  "custom_type": "demo_custom",
-                  "padding": {
-                    "top": 10,
-                    "right": 0,
-                    "bottom": 10,
-                    "left": 0
-                  },
-                  "background": [
-                    {
-                      "type": "solid",
-                      "color": "#3dff07"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         }

@@ -6,28 +6,32 @@ import LayoutKit
 
 
 struct CustomViewFactory: DivCustomBlockFactory {
-  private let requester: ExpoDivKitView
+    private let requester: ExpoDivKitView
     
-  init(requester: ExpoDivKitView) {
-    self.requester = requester
-  }
-
-  public func makeBlock(
-    data: DivCustomData,
-    context: DivBlockModelingContext
-  ) -> Block {
-      
-      let uniqueTag = UUID().uuidString
-      let tag = Int(uniqueTag) ?? 0
-      let block = CustomBlock(
-        tag: tag,
-        widthTrait: data.widthTrait,
-        heightTrait: data.heightTrait
-      )
-
-      self.requester.sendRequestToRenderCustomView(customViewId: String(tag), customType: data.name)
-      
-      return block
+    init(requester: ExpoDivKitView) {
+        self.requester = requester
+    }
     
-  }
+    public func makeBlock(
+        data: DivCustomData,
+        context: DivBlockModelingContext
+    ) -> Block {
+        
+        if let nativeViewId = data.data["nativeViewId"] as? String {
+            if let customView = requester.getCusomViewById(customViewId: nativeViewId) {
+                return CustomBlock(
+                    view: customView,
+                    widthTrait: data.widthTrait,
+                    heightTrait: data.heightTrait
+                )
+            }
+            
+        }
+                
+        return EmptyBlock(
+            widthTrait: data.widthTrait,
+            heightTrait: data.heightTrait
+        )
+        
+    }
 }
