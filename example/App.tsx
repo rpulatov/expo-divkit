@@ -6,31 +6,19 @@ import jsonFile from './div_json.json'
 
 export default function App() {
 
-  const [json, setJson] = React.useState(jsonFile)
+  const [json, setJson] = React.useState<object | null>(jsonFile)
 
 
   return (
-    <Pressable onPress={() => setJson({
-      ...json,
-      cards: json.cards.map(item => ({
-        ...item,
-        states: item.states.map(state => ({
-          ...state,
-          div: {
-            ...state.div,
-            items: state.div.items.map(val => ({
-              ...val,
-              favorites: String(Number(val.favorites) + 1)
-            }))
-          }
-        }))
-      }))
-    })} style={styles.container}>
+    <Pressable onPress={() => json ? setJson(null)  : setJson(jsonFile) } style={styles.container}>
       <View style={styles.container}>
+        {json? 
         <ExpoDivKit.ExpoDivKitView
           style={{ flex: 1, backgroundColor: "purple" }}
           json={json}
-        />
+        >
+          <View style={styles.view}></View>
+        </ExpoDivKit.ExpoDivKitView> : null}
       </View>
     </Pressable>
   );
@@ -41,4 +29,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  view: {
+    width: 100,
+    height: 100,
+    backgroundColor: "#234267"
+  }
 });
