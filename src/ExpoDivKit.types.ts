@@ -5,5 +5,5 @@ export type ChangeEventPayload = {
 };
 
 export type ExpoDivKitViewProps = {
-  name: string;
+  json: {[key: string]: any}
 } & ViewProps;
