@@ -20,12 +20,10 @@ class TestViewComponent extends React.Component {
 
   render(): React.ReactNode {
     return (
-      <View style={this.state.show ? styles.view : styles.view2}>
-        <View style={styles.view2}>
-          <Text>RENDERED FROM REACT 1</Text>
-          <Text>RENDERED FROM REACT 2</Text>
-          {this.state.show ? <Text>RENDERED FROM REACT 3</Text> : null}
-        </View>
+      <View style={this.state.show ? styles.view2 : styles.view}>
+        <Text>RENDERED FROM REACT 1</Text>
+        <Text>RENDERED FROM REACT 2</Text>
+        {this.state.show ? <Text>RENDERED FROM REACT 3</Text> : null}
       </View>
     );
   }
@@ -38,7 +36,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {json ? <ExpoDivKitView style={{ width: "100%" }} json={json} /> : null}
+      {json ? <ExpoDivKitView json={json} /> : null}
 
       <Pressable
         onPress={() => (json ? setJson(null) : setJson(jsonFile))}
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
   view: {
     width: "100%",
     height: 100,
-    backgroundColor: "#86a57e",
+    backgroundColor: "#86057e",
   },
   view2: {
     width: "100%",
