@@ -120,7 +120,7 @@ export class ExpoDivKitView extends React.Component<
 
   onLayout = (e: any) => {
     console.log("onLayout", e.nativeEvent);
-    if (this.refView.current && this.isNeedToReportOfRender) {
+    if (this.refView.current /* && this.isNeedToReportOfRender*/) {
       console.log("send onCustomViewRendered");
       NativeModule.onCustomViewRendered(findNodeHandle(this.refView.current));
       this.isNeedToReportOfRender = false;
@@ -128,23 +128,27 @@ export class ExpoDivKitView extends React.Component<
   };
 
   render() {
-    // console.log("render indexedJson", this.state.indexedJson);
-    console.log("render customViews", this.state.customViews);
-
     const { indexedJson } = this.state;
 
     return indexedJson ? (
       <NativeView
         ref={this.refView}
         json={indexedJson}
-        onLayout={this.onLayout}
         onHeightChanged={this.onHeightChanged}
         style={{ width: "100%", height: this.state.rootViewHeight }}
       >
         {this.state.customViews.map(({ nativeViewId, customType }) => {
           const Component = СustomComponentLibrary.get(customType);
           return Component ? (
-            <Component key={nativeViewId} nativeID={nativeViewId} />
+            <View
+              key={nativeViewId}
+              nativeID={nativeViewId}
+              style={{ position: "absolute", left: 0, right: 0, top: 0 }}
+              // TODO: #104735
+              onLayout={this.onLayout}
+            >
+              <Component />
+            </View>
           ) : null;
         })}
       </NativeView>

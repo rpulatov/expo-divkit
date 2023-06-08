@@ -36,4 +36,4 @@ export type EventRenderCustomViewRequested = NativeSyntheticEvent<{
 
 export type EventHeightChanged = NativeSyntheticEvent<{ height: number }>;
 
-export type CustomViewComponent = React.ComponentClass<{ nativeID: string }>;
+export type CustomViewComponent = React.ComponentClass;

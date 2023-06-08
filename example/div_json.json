@@ -231,7 +231,6 @@
               "text": "test"
             },
             {
-              "id": "9999999",
               "type": "custom",
               "custom_type": "demo_custom"
             },
@@ -245,6 +244,10 @@
               "comments": "4",
               "views": "6.9K",
               "favorites": "39"
+            },
+            {
+              "type": "custom",
+              "custom_type": "demo_custom"
             }
           ]
         }

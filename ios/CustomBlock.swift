@@ -45,10 +45,10 @@ public final class CustomBlock: BlockWithTraits {
         renderingDelegate: RenderingDelegate?
     ) {
         let customView = view as! CustomView
+        customView.setParentBlock(self)
         if let subview = self.view {
             self.heightTrait = LayoutTrait.fixed(subview.frame.size.height)
-            customView.addSubview(subview)
-            
+            customView.addSubview(subview)    
         }
     }
     

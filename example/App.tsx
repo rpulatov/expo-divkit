@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, View, Text } from "react-native";
 
 import jsonFile from "./div_json.json";
 
-class TestViewComponent extends React.Component<{ nativeID: string }> {
+class TestViewComponent extends React.Component {
   state = {
     show: false,
   };
@@ -14,16 +14,13 @@ class TestViewComponent extends React.Component<{ nativeID: string }> {
     console.log("set timeout");
     setTimeout(() => {
       console.log("timeouted");
-      // this.setState({ show: true });
+      this.setState({ show: true });
     }, 10000);
   }
 
   render(): React.ReactNode {
     return (
-      <View
-        nativeID={this.props.nativeID}
-        style={this.state.show ? styles.view : styles.view2}
-      >
+      <View style={this.state.show ? styles.view : styles.view2}>
         <View style={styles.view2}>
           <Text>RENDERED FROM REACT 1</Text>
           <Text>RENDERED FROM REACT 2</Text>

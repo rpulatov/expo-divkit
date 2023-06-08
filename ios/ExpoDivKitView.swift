@@ -54,6 +54,7 @@ final class ExpoDivKitView: ExpoView {
             return
         }
         if let state = state {
+            // TODO: #104871 проверить чтобы кастом виджеты рендерились на половину ширины контейнера
             let blockSize = state.block.size(forResizableBlockSize: bounds.size)
             state.view.frame = CGRect(origin: .zero, size: blockSize)
             
