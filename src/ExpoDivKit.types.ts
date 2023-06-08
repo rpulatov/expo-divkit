@@ -16,7 +16,8 @@ export type CustomViewState = {
 
 export type ExpoDivKitViewProps = {
   json: DivKitJson;
-} & React.ComponentProps<typeof View>;
+} & React.RefAttributes<View> &
+  React.ComponentProps<typeof View>;
 
 export type ExpoDivKitViewState = {
   indexedJson?: DivKitJson;

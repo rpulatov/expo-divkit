@@ -39,7 +39,7 @@ export class ExpoDivKitView extends React.Component<
   ExpoDivKitViewState
 > {
   isNeedToReportOfRender = false;
-  refView: React.RefObject<typeof View>;
+  refView: React.RefObject<View>;
 
   constructor(props) {
     super(props);
@@ -110,20 +110,15 @@ export class ExpoDivKitView extends React.Component<
     const deepCopy = deepCopyAndIndexCustom(data, new IndexObject());
     const [indexedJson, customViews] = deepCopy;
     this.setState({ indexedJson, customViews });
-    if (customViews.length > 0) this.isNeedToReportOfRender = true;
   };
 
   onHeightChanged = (e: EventHeightChanged) => {
-    console.log("onHeightChanged", e.nativeEvent);
     this.setState({ rootViewHeight: e.nativeEvent.height });
   };
 
-  onLayout = (e: any) => {
-    console.log("onLayout", e.nativeEvent);
-    if (this.refView.current /* && this.isNeedToReportOfRender*/) {
-      console.log("send onCustomViewRendered");
+  onLayout = () => {
+    if (this.refView.current) {
       NativeModule.onCustomViewRendered(findNodeHandle(this.refView.current));
-      this.isNeedToReportOfRender = false;
     }
   };
 
