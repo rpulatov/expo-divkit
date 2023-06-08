@@ -26,7 +26,6 @@ export type ExpoDivKitViewState = {
 
 export type NativeViewProps = ExpoDivKitViewProps & {
   onHeightChanged: (e: EventHeightChanged) => void;
-  ы;
 };
 
 export type EventRenderCustomViewRequested = NativeSyntheticEvent<{
