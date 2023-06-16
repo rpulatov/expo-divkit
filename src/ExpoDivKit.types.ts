@@ -1,4 +1,4 @@
-import { ViewProps, View, NativeSyntheticEvent } from "react-native";
+import { View, NativeSyntheticEvent } from "react-native";
 
 export type ChangeEventPayload = {
   value: string;
