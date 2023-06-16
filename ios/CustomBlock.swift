@@ -1,9 +1,8 @@
 import Foundation
 
-
 import DivKit
 import LayoutKit
-import Base
+import CommonCore
 
 
 public final class CustomBlock: BlockWithTraits {

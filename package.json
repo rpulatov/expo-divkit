@@ -1,6 +1,6 @@
 {
-  "name": "expo-divkit",
-  "version": "0.1.1",
+  "name": "expo-divkit2",
+  "version": "0.1.2",
   "description": "divkit render library",
   "main": "build/index.js",
   "types": "build/index.d.ts",
