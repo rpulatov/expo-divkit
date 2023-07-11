@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'DivKit', '~> 23.7.0'
+  s.dependency 'DivKit', '~> 25.6.0'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {

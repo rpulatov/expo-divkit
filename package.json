@@ -1,5 +1,5 @@
 {
-  "name": "expo-divkit2",
+  "name": "expo-divkit",
   "version": "0.1.4",
   "description": "divkit render library",
   "main": "build/index.js",
