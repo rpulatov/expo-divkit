@@ -8,8 +8,7 @@ divkit render library
 npm i
 ```
 
-# start develop on android738717
-
+# start develop on android
 
 ```
 npm run build
