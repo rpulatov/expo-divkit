@@ -1,40 +1,20 @@
 PODS:
   - boost (1.76.0)
-  - DivKit (23.7.0):
-    - DivKit_Base (= 23.7.0)
-    - DivKit_BaseTiny (= 23.7.0)
-    - DivKit_BaseUI (= 23.7.0)
-    - DivKit_CommonCore (= 23.7.0)
-    - DivKit_LayoutKit (= 23.7.0)
-    - DivKit_LayoutKitInterface (= 23.7.0)
-    - DivKit_Networking (= 23.7.0)
-    - DivKit_Serialization (= 23.7.0)
-    - DivKit_TemplatesSupport (= 23.7.0)
-  - DivKit_Base (23.7.0):
-    - DivKit_BaseTiny (= 23.7.0)
-    - DivKit_BaseUI (= 23.7.0)
-  - DivKit_BaseTiny (23.7.0)
-  - DivKit_BaseUI (23.7.0):
-    - DivKit_BaseTiny (= 23.7.0)
-  - DivKit_CommonCore (23.7.0):
-    - DivKit_Base (= 23.7.0)
-    - DivKit_BaseTiny (= 23.7.0)
-  - DivKit_LayoutKit (23.7.0):
-    - DivKit_BaseTiny (= 23.7.0)
-    - DivKit_BaseUI (= 23.7.0)
-    - DivKit_CommonCore (= 23.7.0)
-    - DivKit_LayoutKitInterface (= 23.7.0)
-  - DivKit_LayoutKitInterface (23.7.0):
-    - DivKit_Base (= 23.7.0)
-    - DivKit_BaseTiny (= 23.7.0)
-    - DivKit_BaseUI (= 23.7.0)
-  - DivKit_Networking (23.7.0):
-    - DivKit_Base (= 23.7.0)
-  - DivKit_Serialization (23.7.0):
-    - DivKit_CommonCore (= 23.7.0)
-  - DivKit_TemplatesSupport (23.7.0):
-    - DivKit_CommonCore (= 23.7.0)
-    - DivKit_Serialization (= 23.7.0)
+  - DivKit (29.8.0):
+    - DivKit_LayoutKit (= 29.8.0)
+    - DivKit_Serialization (= 29.8.0)
+    - VGSLCommonCore (~> 3.0)
+    - VGSLNetworking (~> 3.0)
+  - DivKit_LayoutKit (29.8.0):
+    - DivKit_LayoutKitInterface (= 29.8.0)
+    - VGSLCommonCore (~> 3.0)
+    - VGSLNetworking (~> 3.0)
+  - DivKit_LayoutKitInterface (29.8.0):
+    - VGSLBase (~> 3.0)
+    - VGSLBaseTiny (~> 3.0)
+    - VGSLBaseUI (~> 3.0)
+  - DivKit_Serialization (29.8.0):
+    - VGSLCommonCore (~> 3.0)
   - DoubleConversion (1.1.6)
   - EXApplication (5.0.1):
     - ExpoModulesCore
@@ -46,8 +26,8 @@ PODS:
     - ExpoModulesCore
   - Expo (47.0.13):
     - ExpoModulesCore
-  - ExpoDivKit (0.1.0):
-    - DivKit
+  - ExpoDivKit (0.1.7):
+    - DivKit (~> 29.8.0)
     - ExpoModulesCore
   - ExpoKeepAwake (11.0.1):
     - ExpoModulesCore
@@ -342,6 +322,21 @@ PODS:
     - React-jsi (= 0.70.5)
     - React-logger (= 0.70.5)
     - React-perflogger (= 0.70.5)
+  - VGSL_Fundamentals (3.1.2):
+    - VGSL_Fundamentals_Tiny (= 3.1.2)
+  - VGSL_Fundamentals_Tiny (3.1.2)
+  - VGSLBase (3.1.2):
+    - VGSL_Fundamentals (= 3.1.2)
+    - VGSLBaseTiny (= 3.1.2)
+    - VGSLBaseUI (= 3.1.2)
+  - VGSLBaseTiny (3.1.2):
+    - VGSL_Fundamentals_Tiny (= 3.1.2)
+  - VGSLBaseUI (3.1.2):
+    - VGSLBaseTiny (= 3.1.2)
+  - VGSLCommonCore (3.1.2):
+    - VGSLBase (= 3.1.2)
+  - VGSLNetworking (3.1.2):
+    - VGSLBase (= 3.1.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -391,16 +386,17 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - DivKit
-    - DivKit_Base
-    - DivKit_BaseTiny
-    - DivKit_BaseUI
-    - DivKit_CommonCore
     - DivKit_LayoutKit
     - DivKit_LayoutKitInterface
-    - DivKit_Networking
     - DivKit_Serialization
-    - DivKit_TemplatesSupport
     - fmt
+    - VGSL_Fundamentals
+    - VGSL_Fundamentals_Tiny
+    - VGSLBase
+    - VGSLBaseTiny
+    - VGSLBaseUI
+    - VGSLCommonCore
+    - VGSLNetworking
 
 EXTERNAL SOURCES:
   boost:
@@ -488,23 +484,17 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  DivKit: 1bd0cbed338e09439eba0a3302d67471c545847d
-  DivKit_Base: 7a137d4494c7c9fa33c56e4b21fa1d8cc16409ac
-  DivKit_BaseTiny: 0b274bc6cf5f748e1f69e83a2fd3c12f27908cf4
-  DivKit_BaseUI: 56ff352e5d672c6ec6e8f2514b25cab0db5ea600
-  DivKit_CommonCore: e36f4760c13082b2ac3b326a7cd35dcd89bcd77e
-  DivKit_LayoutKit: c72107c83b52be11f627e53fe636431318c4daff
-  DivKit_LayoutKitInterface: 5f74c4d18184c43e56344e3f7d822434cebfd72a
-  DivKit_Networking: ebd20bb44400054cba5b32b58d236c41f26acd79
-  DivKit_Serialization: ace6e58363d7b8e2b27537a47e95ff6d36f54f83
-  DivKit_TemplatesSupport: 2c17b30548cdb2875666e968da714df62403322c
+  DivKit: 561613347b25e20de16497d25adaccfbd7a4afc7
+  DivKit_LayoutKit: a83fab8649fc97ad72766c6fdc6e2b5cd4acbb0d
+  DivKit_LayoutKitInterface: 456fc32f1bb95a7ab246b1bc876700ba68263b01
+  DivKit_Serialization: a926580d65388b1a27805ae01520cc932d8fe4c1
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: 034b1c40a8e9fe1bff76a1e511ee90dff64ad834
   EXConstants: 3c86653c422dd77e40d10cbbabb3025003977415
   EXFileSystem: 60602b6eefa6873f97172c684b7537c9760b50d6
   EXFont: 319606bfe48c33b5b5063fb0994afdc496befe80
   Expo: b9fa98bf260992312ee3c424400819fb9beadafe
-  ExpoDivKit: fe95e2c9049eefa0a75a6c3a396b1bdd90c4147e
+  ExpoDivKit: c2d78a1751119630a6e0e72b9bdb6d58b5787e64
   ExpoKeepAwake: 69b59d0a8d2b24de9f82759c39b3821fec030318
   ExpoModulesCore: 485dff3a59b036a33b6050c0a5aea3cf1037fdd1
   EXSplashScreen: 3e989924f61a8dd07ee4ea584c6ba14be9b51949
@@ -538,8 +528,15 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8e5c8c5d17af641f306d7380d8d0fe9b3c142c48
   React-runtimeexecutor: 7401c4a40f8728fd89df4a56104541b760876117
   ReactCommon: c9246996e73bf75a2c6c3ff15f1e16707cdc2da9
+  VGSL_Fundamentals: 2639d415b8b0c3aabdd67c45b35edd594b46d0ff
+  VGSL_Fundamentals_Tiny: 0a62a3517392723335e5b9e6c971d0f447564b35
+  VGSLBase: d1332977df74fcb1f925ab7757563a78463c38c4
+  VGSLBaseTiny: 4f422185dcd5d8efc42ecb146517d5d0b6b835e0
+  VGSLBaseUI: 37c03d541c32ba15c46649e1236f926df8657901
+  VGSLCommonCore: f52c03fd114e5b08a9c8d4588839591341f756e5
+  VGSLNetworking: c723f1d4338e3b4b7eeee26d90f3767440c2ac31
   Yoga: eca980a5771bf114c41a754098cd85e6e0d90ed7
 
 PODFILE CHECKSUM: f7c2f00bb2ca4bdbe5a1c2ba30041058e3ceae99
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.15.2
