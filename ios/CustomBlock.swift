@@ -2,8 +2,7 @@ import Foundation
 
 import DivKit
 import LayoutKit
-import CommonCore
-
+import BasePublic
 
 public final class CustomBlock: BlockWithTraits {
     public var widthTrait: LayoutTrait

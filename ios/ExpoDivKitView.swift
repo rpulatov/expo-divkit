@@ -1,7 +1,7 @@
 import ExpoModulesCore
 import DivKit
 import LayoutKit
-import CommonCore
+import BasePublic
 
 struct State {
     let block: Block
@@ -109,7 +109,7 @@ extension ExpoDivKitView: UIActionEventPerforming {
     func perform(uiActionEvent event: UIActionEvent, from _: AnyObject) {
         switch event.payload {
         case let .divAction(params):
-            components.handleActions(params: params)
+            components.actionHandler.handle(params: params, sender: event)
             reloadCard()
         case .empty,
                 .url,
