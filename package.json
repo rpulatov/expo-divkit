@@ -30,10 +30,10 @@
   "license": "MIT",
   "homepage": "https://github.com/rpulatov/expo-divkit#readme",
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "@types/react-native": "^0.70.6",
-    "expo-module-scripts": "^3.0.4",
-    "expo-modules-core": "^1.1.0"
+    "@types/react": "~18.2.45",
+    "@types/react-native": "^0.70.19",
+    "expo-module-scripts": "^3.4.1",
+    "expo-modules-core": "^1.11.12"
   },
   "peerDependencies": {
     "expo": "*",

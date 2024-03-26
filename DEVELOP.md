@@ -27,6 +27,6 @@ run debug on Android Studio and in emulator open dev tools(Cmd + M) set
 
 ```
 npm run build
-cd example/ios && pos install
+cd example/ios && pod install
 cd example && npx expo run:ios
 ```
