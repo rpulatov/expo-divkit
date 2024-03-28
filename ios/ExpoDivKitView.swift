@@ -1,7 +1,8 @@
 import ExpoModulesCore
 import DivKit
 import LayoutKit
-import CommonCore
+import BasePublic
+import React
 
 struct State {
     let block: Block
@@ -17,12 +18,10 @@ final class ExpoDivKitView: ExpoView {
     
     required init(appContext: AppContext? = nil) {
         super.init(appContext: appContext)
-        clipsToBounds = true
         
         components = DivKitComponents(
             divCustomBlockFactory: CustomViewFactory(requester: self),
-            updateCardAction: nil,
-            urlOpener: { UIApplication.shared.open($0) }
+            urlHandler: DivUrlHandlerDelegate { UIApplication.shared.open($0) }
         )
         
     }
@@ -34,6 +33,8 @@ final class ExpoDivKitView: ExpoView {
             cardId: DivCardID(rawValue: data.logId),
             cachedImageHolders: cachedImageHolders
         )
+        components.setVariablesAndTriggers(divData: data, cardId: context.cardId)
+
         
         let block = try! data.makeBlock(context: context)
         
@@ -109,7 +110,7 @@ extension ExpoDivKitView: UIActionEventPerforming {
     func perform(uiActionEvent event: UIActionEvent, from _: AnyObject) {
         switch event.payload {
         case let .divAction(params):
-            components.handleActions(params: params)
+            components.actionHandler.handle(params: params, sender: event)
             reloadCard()
         case .empty,
                 .url,

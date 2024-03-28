@@ -1,6 +1,6 @@
 {
   "name": "expo-divkit",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "divkit render library",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -30,10 +30,10 @@
   "license": "MIT",
   "homepage": "https://github.com/rpulatov/expo-divkit#readme",
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "@types/react-native": "^0.70.6",
-    "expo-module-scripts": "^3.0.4",
-    "expo-modules-core": "^1.1.0"
+    "@types/react": "~18.2.45",
+    "expo-module-scripts": "^3.4.1",
+    "expo-modules-core": "^1.11.12",
+    "prettier": "^3.2.5"
   },
   "peerDependencies": {
     "expo": "*",

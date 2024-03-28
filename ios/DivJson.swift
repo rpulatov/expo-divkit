@@ -2,7 +2,6 @@ import Foundation
 
 import DivKit
 import Serialization
-import TemplatesSupport
 
 extension String: Error {}
 
