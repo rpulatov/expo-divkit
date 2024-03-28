@@ -1,20 +1,20 @@
 PODS:
   - boost (1.83.0)
-  - DivKit (29.8.0):
-    - DivKit_LayoutKit (= 29.8.0)
-    - DivKit_Serialization (= 29.8.0)
-    - VGSLCommonCore (~> 3.0)
-    - VGSLNetworking (~> 3.0)
-  - DivKit_LayoutKit (29.8.0):
-    - DivKit_LayoutKitInterface (= 29.8.0)
-    - VGSLCommonCore (~> 3.0)
-    - VGSLNetworking (~> 3.0)
-  - DivKit_LayoutKitInterface (29.8.0):
-    - VGSLBase (~> 3.0)
-    - VGSLBaseTiny (~> 3.0)
-    - VGSLBaseUI (~> 3.0)
-  - DivKit_Serialization (29.8.0):
-    - VGSLCommonCore (~> 3.0)
+  - DivKit (29.11.0):
+    - DivKit_LayoutKit (= 29.11.0)
+    - DivKit_Serialization (= 29.11.0)
+    - VGSLCommonCore (~> 3.1)
+    - VGSLNetworking (~> 3.1)
+  - DivKit_LayoutKit (29.11.0):
+    - DivKit_LayoutKitInterface (= 29.11.0)
+    - VGSLCommonCore (~> 3.1)
+    - VGSLNetworking (~> 3.1)
+  - DivKit_LayoutKitInterface (29.11.0):
+    - VGSLBase (~> 3.1)
+    - VGSLBaseTiny (~> 3.1)
+    - VGSLBaseUI (~> 3.1)
+  - DivKit_Serialization (29.11.0):
+    - VGSLCommonCore (~> 3.1)
   - DoubleConversion (1.1.6)
   - EXConstants (15.4.5):
     - ExpoModulesCore
@@ -23,7 +23,7 @@ PODS:
   - Expo (50.0.14):
     - ExpoModulesCore
   - ExpoDivKit (0.1.7):
-    - DivKit (~> 29.8.0)
+    - DivKit (~> 29.11.0)
     - ExpoModulesCore
   - ExpoFileSystem (16.0.8):
     - ExpoModulesCore
@@ -1306,15 +1306,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  DivKit: 561613347b25e20de16497d25adaccfbd7a4afc7
-  DivKit_LayoutKit: a83fab8649fc97ad72766c6fdc6e2b5cd4acbb0d
-  DivKit_LayoutKitInterface: 456fc32f1bb95a7ab246b1bc876700ba68263b01
-  DivKit_Serialization: a926580d65388b1a27805ae01520cc932d8fe4c1
+  DivKit: 832b3fdc6247c0df7d9512021a7c15666a931587
+  DivKit_LayoutKit: 928b2698e78a68855b9c9f663c344ca99551e5fb
+  DivKit_LayoutKitInterface: 767aaf269db5ac6d998c335723d05b74c54ab55d
+  DivKit_Serialization: 4951f8daa7ddba56141dce2426c5aa5b24e2dc3c
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
   EXConstants: 988aa430ca0f76b43cd46b66e7fae3287f9cc2fc
   EXFont: f20669cb266ef48b004f1eb1f2b20db96cd1df9f
   Expo: e01a77c6fa4bc80a6d1bb949cda1d12d21044abd
-  ExpoDivKit: ecd06a26b719e6d25328bd381ac1970fff41a56a
+  ExpoDivKit: bbe1a7cc0035e3e81d410cb6d1e35de88ec021b2
   ExpoFileSystem: eecaf6796aed0f4dd20042dc2ca2cac6c4bc1185
   ExpoKeepAwake: 0f5cad99603a3268e50af9a6eb8b76d0d9ac956c
   ExpoModulesCore: 61dc57c6e2a35f2f84baf488146db624e03af4cd
