@@ -2,18 +2,18 @@ package expo.modules.divkit
 
 import android.view.View
 import com.yandex.div.core.DivCustomContainerViewAdapter
-import com.yandex.div.core.DivCustomViewAdapter
 import com.yandex.div.core.state.DivStatePath
 import com.yandex.div.core.view2.Div2View
+import com.yandex.div.json.expressions.ExpressionResolver
 import com.yandex.div2.DivCustom
 
 class CustomViewAdapter() : DivCustomContainerViewAdapter {
-    override fun bindView(view: View, div: DivCustom, divView: Div2View, path: DivStatePath) {
+    override fun bindView(view: View, div: DivCustom, divView: Div2View, expressionResolver: ExpressionResolver, path: DivStatePath) {
     }
 
-    override fun createView(div: DivCustom, divView: Div2View, path: DivStatePath): View {
+    override fun createView(div: DivCustom, divView: Div2View, expressionResolver: ExpressionResolver, path: DivStatePath): View {
         val layout = CustomLayout(divView.context)
-        var nativeViewId = div.customProps?.get("nativeViewId").toString()
+        val nativeViewId = div.customProps?.get("nativeViewId").toString()
         layout.tag = "custom$nativeViewId"
         return layout
     }
