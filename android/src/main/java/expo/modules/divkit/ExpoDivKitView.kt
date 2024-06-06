@@ -1,22 +1,17 @@
 package expo.modules.divkit
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
-import com.yandex.div.core.DivActionHandler
 import com.yandex.div.core.DivConfiguration
-import com.yandex.div.core.DivViewFacade
 import com.yandex.div.data.DivParsingEnvironment
 import com.yandex.div.json.ParsingErrorLogger
-import com.yandex.div2.DivAction
 import com.yandex.div2.DivData
 import expo.modules.core.utilities.takeIfInstanceOf
 import expo.modules.kotlin.AppContext
@@ -30,26 +25,9 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
 
-
-
-    class DemoDivActionHandler(val context: Context) : DivActionHandler() {
-
-        private val SCHEME_DIV_ACTION = "div-action"
-        override fun handleAction(action: DivAction, view: DivViewFacade): Boolean {
-            val uri = (if (action.url != null) action.url!!.evaluate(view.expressionResolver) else null)
-                    ?: return false
-            if (SCHEME_DIV_ACTION == uri.scheme) {
-                return super.handleAction(action, view)
-            }
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(context, intent, null)
-            return true
-        }
-    }
-
     private fun createDivConfiguration(): DivConfiguration {
-        return DivConfiguration.Builder(DemoDivImageLoader(context))
-                .actionHandler(DemoDivActionHandler(context))
+        return DivConfiguration.Builder(ExpoDivImageLoader(context))
+                .actionHandler(ExpoDivActionHandler(context))
                 .divCustomContainerViewAdapter(CustomViewAdapter())
                 .supportHyphenation(true)
                 .visualErrorsEnabled(true)

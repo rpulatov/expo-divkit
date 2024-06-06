@@ -36,14 +36,13 @@ export default function App() {
 
   return (
     <ScrollView style={styles.container}>
-      {json ? <ExpoDivKitView json={json} /> : null}
-
       <Pressable
         onPress={() => (json ? setJson(null) : setJson(jsonFile))}
         style={styles.footer}
       >
-        <Text>SHOW/HIDEddd</Text>
+        <Text>SHOW/HIDE</Text>
       </Pressable>
+      {json ? <ExpoDivKitView json={json} /> : null}
     </ScrollView>
   );
 }

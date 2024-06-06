@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import com.yandex.div.core.images.*
 
-class DemoDivImageLoader(
+class ExpoDivImageLoader(
     context: Context
 ) : DivImageLoader {
 
