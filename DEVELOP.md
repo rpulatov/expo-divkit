@@ -30,3 +30,11 @@ npm run build
 cd example/ios && pod install
 cd example && npx expo run:ios
 ```
+
+# publish package
+```
+npm run lint
+npm publish
+
+
+```
