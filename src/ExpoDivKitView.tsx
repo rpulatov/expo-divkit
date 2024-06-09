@@ -21,7 +21,7 @@ const СustomComponentLibrary = new Map<string, CustomViewComponent>();
 
 export function initCustomComponent(
   customType: string,
-  component: CustomViewComponent
+  component: CustomViewComponent,
 ) {
   СustomComponentLibrary.set(customType, component);
 }
@@ -56,7 +56,7 @@ export class ExpoDivKitView extends React.Component<
 
   componentDidUpdate(
     prevProps: ExpoDivKitViewProps,
-    prevState: ExpoDivKitViewState
+    prevState: ExpoDivKitViewState,
   ) {
     if (prevProps.json !== this.props.json) {
       this._initialization(this.props.json);
@@ -70,7 +70,7 @@ export class ExpoDivKitView extends React.Component<
 
     function deepCopyAndIndexCustom(
       obj: any,
-      indexObject: IndexObject
+      indexObject: IndexObject,
     ): [any, Omit<CustomViewState, "Component">[]] {
       const customComponents: Omit<CustomViewState, "Component">[] = [];
       if (obj === null || typeof obj !== "object") {
@@ -83,7 +83,7 @@ export class ExpoDivKitView extends React.Component<
         if (obj.hasOwnProperty(prop)) {
           const [deepCopyValue, nested] = deepCopyAndIndexCustom(
             obj[prop],
-            indexObject
+            indexObject,
           );
           customComponents.push(...nested);
 
@@ -109,7 +109,7 @@ export class ExpoDivKitView extends React.Component<
 
     const deepCopy = deepCopyAndIndexCustom(data, new IndexObject());
     const [indexedJson, customViews] = deepCopy;
-    this.setState({ indexedJson, customViews });
+    this.setState({ indexedJson, customViews, rootViewHeight: 0 });
   };
 
   onHeightChanged = (e: EventHeightChanged) => {
