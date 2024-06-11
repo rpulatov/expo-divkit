@@ -1,11 +1,11 @@
 package expo.modules.divkit
 
 import android.content.Context
-import android.os.Build
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
@@ -114,13 +114,13 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
             Div2Context(
                 baseContext = contextWrapper,
                 configuration = createDivConfiguration(),
-                lifecycleOwner = null
+                lifecycleOwner = appContext.currentActivity as? LifecycleOwner
             )
 
         mainView = MainDivView(divContext).apply {
             layoutParams = LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT
             )
         }
 
