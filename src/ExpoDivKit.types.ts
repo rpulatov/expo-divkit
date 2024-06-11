@@ -4,9 +4,17 @@ export type ChangeEventPayload = {
   value: string;
 };
 
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [x: string]: JSONValue }
+  | JSONValue[];
+
 export type DivKitJson = {
-  templates: { [key: string]: any };
-  card: { [key: string]: any };
+  templates: { [key: string]: JSONValue };
+  card: { [key: string]: JSONValue };
 };
 
 export type CustomViewState = {
@@ -22,7 +30,7 @@ export type ExpoDivKitViewProps = {
 export type ExpoDivKitViewState = {
   indexedJson?: DivKitJson;
   customViews: CustomViewState[];
-  rootViewHeight?: number | string;
+  rootViewHeight?: number | "auto" | `${number}%`;
 };
 
 export type NativeViewProps = ExpoDivKitViewProps & {

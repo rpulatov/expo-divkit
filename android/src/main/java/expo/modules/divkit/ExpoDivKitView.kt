@@ -1,11 +1,11 @@
 package expo.modules.divkit
 
 import android.content.Context
-import android.os.Build
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
@@ -20,18 +20,18 @@ import expo.modules.kotlin.views.ExpoView
 import org.json.JSONObject
 
 class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext),
-        View.OnLayoutChangeListener {
+    View.OnLayoutChangeListener {
     private var mainView: MainDivView
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
 
     private fun createDivConfiguration(): DivConfiguration {
         return DivConfiguration.Builder(ExpoDivImageLoader(context))
-                .actionHandler(ExpoDivActionHandler(context))
-                .divCustomContainerViewAdapter(CustomViewAdapter())
-                .supportHyphenation(true)
-                .visualErrorsEnabled(true)
-                .build()
+            .actionHandler(ExpoDivActionHandler(context))
+            .divCustomContainerViewAdapter(CustomViewAdapter())
+            .supportHyphenation(true)
+            .visualErrorsEnabled(true)
+            .build()
     }
 
     fun updateView(jsonData: JSONObject) {
@@ -39,9 +39,9 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         val cardJson = jsonData.optJSONObject("card")
 
         val parsingEnvironment =
-                DivParsingEnvironment(ParsingErrorLogger.ASSERT).apply {
-                    if (templatesJson != null) parseTemplates(templatesJson)
-                }
+            DivParsingEnvironment(ParsingErrorLogger.ASSERT).apply {
+                if (templatesJson != null) parseTemplates(templatesJson)
+            }
 
         val data = cardJson?.let { DivData(parsingEnvironment, it) }
         if (data != null) {
@@ -62,32 +62,32 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
             if (tagString == null) return
 
             val customLayout =
-                    try {
-                        findViewWithTag<CustomLayout>("custom$tagString")
-                    } catch (e: RuntimeException) {
-                        null
-                    } ?: return
+                try {
+                    findViewWithTag<CustomLayout>("custom$tagString")
+                } catch (e: RuntimeException) {
+                    null
+                } ?: return
 
             customLayout.removeAllViews()
             customLayout.addView(
-                    child, ViewGroup.LayoutParams(
+                child, ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+                )
             )
         }
     }
 
     override fun onLayoutChange(
-            view: View,
-            left: Int,
-            top: Int,
-            right: Int,
-            bottom: Int,
-            oldLeft: Int,
-            oldTop: Int,
-            oldRight: Int,
-            oldBottom: Int
+        view: View,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        oldLeft: Int,
+        oldTop: Int,
+        oldRight: Int,
+        oldBottom: Int
     ) {
         if (view == mainView) {
             val heightChanged = bottom - top != oldBottom - oldTop
@@ -103,20 +103,24 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     }
 
     init {
-        val contextWrapper =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    ContextThemeWrapper(context, context.theme)
-                } else {
-                    context as ContextThemeWrapper
-                }
+        layoutParams = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.WRAP_CONTENT
+        )
+
+        val contextWrapper = ContextThemeWrapper(context, context.theme)
 
         divContext =
-                Div2Context(baseContext = contextWrapper, configuration = createDivConfiguration())
+            Div2Context(
+                baseContext = contextWrapper,
+                configuration = createDivConfiguration(),
+                lifecycleOwner = appContext.currentActivity as? LifecycleOwner
+            )
 
         mainView = MainDivView(divContext).apply {
             layoutParams = LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT
             )
         }
 
