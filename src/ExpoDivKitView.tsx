@@ -20,7 +20,6 @@ export class ExpoDivKitView extends React.Component<
   ExpoDivKitViewProps,
   ExpoDivKitViewState
 > {
-  isNeedToReportOfRender = false;
   refView: React.RefObject<View>;
 
   constructor(props) {
