@@ -48,13 +48,9 @@ export class ExpoDivKitView extends React.Component<
     const deepCopy = deepCopyAndIndexCustom(data);
     const [indexedJson, customViews] = deepCopy;
     this.setState({
-      indexedJson,
+      stagedIndexedJson: indexedJson,
+      committedIndexedJson: undefined,
       customViews,
-      /**
-       * Обнуляем высоту родительской view, чтобы заново ее пересчитать с обновленными данными.
-       * Если это не сделать, то на android при изменении json не будет вызван onHeightChanged
-       */
-      rootViewHeight: 0,
     });
   };
 
@@ -69,12 +65,16 @@ export class ExpoDivKitView extends React.Component<
   };
 
   render() {
-    const { indexedJson } = this.state;
+    const { stagedIndexedJson, committedIndexedJson } = this.state;
 
-    return indexedJson ? (
+    if (stagedIndexedJson !== committedIndexedJson) {
+      this.setState({ committedIndexedJson: stagedIndexedJson });
+    }
+
+    return committedIndexedJson ? (
       <NativeView
         ref={this.refView}
-        json={indexedJson}
+        json={committedIndexedJson}
         onHeightChanged={this.onHeightChanged}
         style={{ width: "100%", height: this.state.rootViewHeight }}
       >
