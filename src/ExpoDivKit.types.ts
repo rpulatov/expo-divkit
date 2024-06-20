@@ -28,7 +28,8 @@ export type ExpoDivKitViewProps = {
   React.ComponentProps<typeof View>;
 
 export type ExpoDivKitViewState = {
-  indexedJson?: DivKitJson;
+  stagedIndexedJson?: DivKitJson;
+  committedIndexedJson?: DivKitJson;
   customViews: CustomViewState[];
   rootViewHeight?: number | "auto" | `${number}%`;
 };
