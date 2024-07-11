@@ -2,9 +2,9 @@
   "expo": {
     "name": "expo-divkit",
     "slug": "expo-divkit",
-    "version": "0.1.7",
+    "version": "0.4.0",
     "description": "divkit render library for react-native expo",
-    "sdkVersion": "47.0.0",
+    "sdkVersion": "50.0.0",
     "platforms": ["ios", "android"]
   }
 }
