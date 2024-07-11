@@ -11,8 +11,10 @@ import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
 import com.yandex.div.core.DivConfiguration
+import com.yandex.div.core.expression.variables.DivVariableController
 import com.yandex.div.core.view2.Div2View
 import com.yandex.div.data.DivParsingEnvironment
+import com.yandex.div.data.Variable
 import com.yandex.div.json.ParsingErrorLogger
 import com.yandex.div2.DivData
 import expo.modules.core.utilities.takeIfInstanceOf
@@ -27,6 +29,11 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
 
+    private val safeAreaTop = Variable.IntegerVariable("safeAreaTop", 0)
+    private val safeAreaBottom = Variable.IntegerVariable("safeAreaBottom", 0)
+    private val safeAreaLeft = Variable.IntegerVariable("safeAreaLeft", 0)
+    private val safeAreaRight = Variable.IntegerVariable("safeAreaRight", 0)
+
     init {
         orientation = VERTICAL
         layoutParams = LayoutParams(
@@ -35,11 +42,17 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         )
 
         val contextWrapper = ContextThemeWrapper(context, context.theme)
+        val variableController = DivVariableController()
+
+        variableController.putOrUpdate(safeAreaTop)
+        variableController.putOrUpdate(safeAreaBottom)
+        variableController.putOrUpdate(safeAreaLeft)
+        variableController.putOrUpdate(safeAreaRight)
 
         divContext =
             Div2Context(
                 baseContext = contextWrapper,
-                configuration = createDivConfiguration(),
+                configuration = createDivConfiguration(variableController),
                 lifecycleOwner = appContext.currentActivity as? LifecycleOwner
             )
 
@@ -68,10 +81,18 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         }
     }
 
-    private fun createDivConfiguration(): DivConfiguration {
+    fun setSafeAreaInsets(top: Number, bottom: Number, left: Number, right: Number) {
+        safeAreaTop.set(top.toLong())
+        safeAreaBottom.set(bottom.toLong())
+        safeAreaLeft.set(left.toLong())
+        safeAreaRight.set(right.toLong())
+    }
+
+    private fun createDivConfiguration(variableController: DivVariableController): DivConfiguration {
         return DivConfiguration.Builder(ExpoDivImageLoader(context))
             .actionHandler(ExpoDivActionHandler(context))
             .divCustomContainerViewAdapter(CustomViewAdapter())
+            .divVariableController(variableController)
             .supportHyphenation(true)
             .visualErrorsEnabled(true)
             .build()

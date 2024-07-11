@@ -1,7 +1,5 @@
 package expo.modules.divkit
 
-import android.view.View
-import android.widget.LinearLayout
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.UIManagerModule
@@ -16,7 +14,8 @@ class ExpoDivKitModule : Module() {
 
         Function("onCustomViewRendered") { node: Int ->
             val rnContext = appContext.reactContext as? ReactApplicationContext ?: return@Function
-            val uiManager = rnContext.getNativeModule(UIManagerModule::class.java) ?: return@Function
+            val uiManager =
+                rnContext.getNativeModule(UIManagerModule::class.java) ?: return@Function
             appContext.activityProvider?.currentActivity?.runOnUiThread {
                 val view = uiManager.resolveView(node) as ExpoDivKitView
                 view.onCustomViewRendered()
@@ -34,6 +33,17 @@ class ExpoDivKitModule : Module() {
 
             Prop("layoutHeight") { view: ExpoDivKitView, layoutHeight: Float ->
                 view.setLayoutHeightParam(layoutHeight)
+            }
+
+            Prop("safeAreaInsets") { view: ExpoDivKitView, insets: ReadableMap ->
+                insets?.let {
+                    view.setSafeAreaInsets(
+                        it.getDouble("top") ?: 0,
+                        insets.getDouble("bottom") ?: 0,
+                        insets.getDouble("left") ?: 0,
+                        insets.getDouble("right") ?: 0
+                    )
+                }
             }
         }
     }

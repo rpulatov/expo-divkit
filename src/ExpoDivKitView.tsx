@@ -16,7 +16,6 @@ import { deepCopyAndIndexCustom } from "./utils";
 
 export function ExpoDivKitView({
   json,
-  style,
   safeAreaInsets,
   flex = false,
 }: ExpoDivKitViewProps) {
@@ -71,6 +70,7 @@ export function ExpoDivKitView({
         onHeightChanged={onHeightChanged}
         style={{ height: rootViewHeight }}
         layoutHeight={layoutHeight}
+        safeAreaInsets={safeAreaInsets}
       >
         {customViews.map(({ nativeViewId, customType }) => {
           const Component = CustomComponentLibrary.get(customType);

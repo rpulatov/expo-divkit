@@ -492,7 +492,7 @@
             "type": "match_parent"
           },
           "paddings": {
-            "top": 16,
+            "top": "@{safeAreaTop}",
             "bottom": 80
           },
           "background": [
