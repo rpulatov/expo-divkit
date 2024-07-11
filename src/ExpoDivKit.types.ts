@@ -22,20 +22,23 @@ export type CustomViewState = {
   customType: string;
 };
 
+export type EdgeSafeAreaInsets = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
 export type ExpoDivKitViewProps = {
   json: DivKitJson;
+  safeAreaInsets?: EdgeSafeAreaInsets;
+  flex?: boolean;
 } & React.RefAttributes<View> &
   React.ComponentProps<typeof View>;
 
-export type ExpoDivKitViewState = {
-  stagedIndexedJson?: DivKitJson;
-  committedIndexedJson?: DivKitJson;
-  customViews: CustomViewState[];
-  rootViewHeight?: number | "auto" | `${number}%`;
-};
-
 export type NativeViewProps = ExpoDivKitViewProps & {
   onHeightChanged: (e: EventHeightChanged) => void;
+  layoutHeight?: LayoutHeight;
 };
 
 export type EventRenderCustomViewRequested = NativeSyntheticEvent<{
@@ -46,3 +49,9 @@ export type EventRenderCustomViewRequested = NativeSyntheticEvent<{
 export type EventHeightChanged = NativeSyntheticEvent<{ height: number }>;
 
 export type CustomViewComponent = React.ComponentClass;
+
+export type LayoutHeight = LayoutParam | number;
+export enum LayoutParam {
+  MATCH_PARENT = -1,
+  WRAP_CONTENT = -2,
+}

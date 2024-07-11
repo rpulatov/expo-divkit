@@ -1,84 +1,74 @@
-import {
-  requireNativeModule,
-  requireNativeViewManager,
-} from "expo-modules-core";
 import * as React from "react";
-import { findNodeHandle, View } from "react-native";
+import { findNodeHandle, LayoutChangeEvent, View } from "react-native";
 
 import { CustomComponentLibrary } from "./CustomComponent";
 import {
+  CustomViewState,
   DivKitJson,
   EventHeightChanged,
   ExpoDivKitViewProps,
-  ExpoDivKitViewState,
-  NativeViewProps,
+  LayoutHeight,
+  LayoutParam,
 } from "./ExpoDivKit.types";
-import { COMPONENT_NAME } from "./constants";
+import { NativeModule } from "./NativeModule";
+import { NativeView } from "./NativeView";
 import { deepCopyAndIndexCustom } from "./utils";
 
-export class ExpoDivKitView extends React.Component<
-  ExpoDivKitViewProps,
-  ExpoDivKitViewState
-> {
-  refView: React.RefObject<View>;
+export function ExpoDivKitView({
+  json,
+  style,
+  safeAreaInsets,
+  flex = false,
+}: ExpoDivKitViewProps) {
+  const refView = React.useRef<View>(null);
+  const [customViews, setCustomViews] = React.useState<CustomViewState[]>([]);
+  const [rootViewHeight, setRootViewHeight] = React.useState<number>(0);
+  const [layoutHeight, setLayoutHeight] = React.useState<LayoutHeight>(
+    LayoutParam.WRAP_CONTENT,
+  );
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      customViews: [],
-      rootViewHeight: 0,
-    };
-    this.refView = React.createRef();
-  }
+  const [indexedJson, setIndexedJson] = React.useState<DivKitJson>(json);
 
-  componentDidMount() {
-    this._initialization(this.props.json);
-  }
-
-  componentDidUpdate(
-    prevProps: ExpoDivKitViewProps,
-    prevState: ExpoDivKitViewState,
-  ) {
-    if (prevProps.json !== this.props.json) {
-      this._initialization(this.props.json);
-    }
-  }
-
-  _initialization = (data: DivKitJson) => {
+  const initialization = (data: DivKitJson) => {
     const deepCopy = deepCopyAndIndexCustom(data);
     const [indexedJson, customViews] = deepCopy;
-    this.setState({
-      stagedIndexedJson: indexedJson,
-      committedIndexedJson: undefined,
-      customViews,
-    });
+
+    setIndexedJson(indexedJson);
+    setCustomViews(customViews);
   };
 
-  onHeightChanged = (e: EventHeightChanged) => {
-    this.setState({ rootViewHeight: e.nativeEvent.height });
+  const onHeightChanged = (e: EventHeightChanged) => {
+    setRootViewHeight(e.nativeEvent.height);
   };
 
-  onLayout = () => {
-    if (this.refView.current) {
-      NativeModule.onCustomViewRendered(findNodeHandle(this.refView.current));
+  const onLayout = () => {
+    if (refView.current) {
+      NativeModule.onCustomViewRendered(findNodeHandle(refView.current));
     }
   };
 
-  render() {
-    const { stagedIndexedJson, committedIndexedJson } = this.state;
+  const onLayoutWrapper = (e: LayoutChangeEvent) => {
+    setLayoutHeight(
+      flex ? e.nativeEvent.layout.height : LayoutParam.WRAP_CONTENT,
+    );
+  };
 
-    if (stagedIndexedJson !== committedIndexedJson) {
-      this.setState({ committedIndexedJson: stagedIndexedJson });
-    }
+  React.useEffect(() => {
+    initialization(json);
+  }, [json]);
 
-    return committedIndexedJson ? (
+  console.info({ rootViewHeight, layoutHeight });
+
+  return (
+    <View style={flex ? { flex: 1 } : undefined} onLayout={onLayoutWrapper}>
       <NativeView
-        ref={this.refView}
-        json={committedIndexedJson}
-        onHeightChanged={this.onHeightChanged}
-        style={{ width: "100%", height: this.state.rootViewHeight }}
+        ref={refView}
+        json={indexedJson}
+        onHeightChanged={onHeightChanged}
+        style={{ height: rootViewHeight }}
+        layoutHeight={layoutHeight}
       >
-        {this.state.customViews.map(({ nativeViewId, customType }) => {
+        {customViews.map(({ nativeViewId, customType }) => {
           const Component = CustomComponentLibrary.get(customType);
           return Component ? (
             <View
@@ -86,18 +76,13 @@ export class ExpoDivKitView extends React.Component<
               nativeID={nativeViewId}
               style={{ position: "absolute", left: 0, right: 0, top: 0 }}
               // TODO: #104735
-              onLayout={this.onLayout}
+              onLayout={onLayout}
             >
               <Component />
             </View>
           ) : null;
         })}
       </NativeView>
-    ) : null;
-  }
+    </View>
+  );
 }
-
-const NativeView: React.ComponentType<NativeViewProps> =
-  requireNativeViewManager(COMPONENT_NAME);
-
-const NativeModule = requireNativeModule(COMPONENT_NAME);

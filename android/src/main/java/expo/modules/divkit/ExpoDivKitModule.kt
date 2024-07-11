@@ -1,6 +1,7 @@
 package expo.modules.divkit
 
 import android.view.View
+import android.widget.LinearLayout
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.UIManagerModule
@@ -29,6 +30,10 @@ class ExpoDivKitModule : Module() {
 
             Prop("json") { view: ExpoDivKitView, json: ReadableMap ->
                 view.updateView(JSONObject(json.toHashMap()))
+            }
+
+            Prop("layoutHeight") { view: ExpoDivKitView, layoutHeight: Float ->
+                view.setLayoutHeightParam(layoutHeight)
             }
         }
     }

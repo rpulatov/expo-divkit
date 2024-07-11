@@ -1,5 +1,6 @@
 package expo.modules.divkit
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
@@ -10,6 +11,7 @@ import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
 import com.yandex.div.core.DivConfiguration
+import com.yandex.div.core.view2.Div2View
 import com.yandex.div.data.DivParsingEnvironment
 import com.yandex.div.json.ParsingErrorLogger
 import com.yandex.div2.DivData
@@ -19,11 +21,52 @@ import expo.modules.kotlin.viewevent.EventDispatcher
 import expo.modules.kotlin.views.ExpoView
 import org.json.JSONObject
 
+@SuppressLint("ViewConstructor")
 class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext),
     View.OnLayoutChangeListener {
-    private var mainView: MainDivView
+    private var div2View: Div2View
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
+
+    init {
+        orientation = VERTICAL
+        layoutParams = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.WRAP_CONTENT
+        )
+
+        val contextWrapper = ContextThemeWrapper(context, context.theme)
+
+        divContext =
+            Div2Context(
+                baseContext = contextWrapper,
+                configuration = createDivConfiguration(),
+                lifecycleOwner = appContext.currentActivity as? LifecycleOwner
+            )
+
+        div2View = Div2View(divContext).apply {
+            layoutParams = LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                2500
+            )
+        }
+
+        addView(div2View)
+        div2View.addOnLayoutChangeListener(this)
+
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, MeasureSpec.UNSPECIFIED)
+    }
+
+    fun setLayoutHeightParam(param: Float) {
+        if (param.toInt() == LayoutParams.WRAP_CONTENT || param.toInt() == LayoutParams.MATCH_PARENT) {
+            div2View.layoutParams.height = param.toInt()
+        } else {
+            div2View.layoutParams.height = convertDpToPixels(param,context)
+        }
+    }
 
     private fun createDivConfiguration(): DivConfiguration {
         return DivConfiguration.Builder(ExpoDivImageLoader(context))
@@ -45,7 +88,7 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
 
         val data = cardJson?.let { DivData(parsingEnvironment, it) }
         if (data != null) {
-            mainView.setData(data, DivDataTag(data.logId))
+            div2View.setData(data, DivDataTag(data.logId))
         }
     }
 
@@ -89,7 +132,7 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         oldRight: Int,
         oldBottom: Int
     ) {
-        if (view == mainView) {
+        if (view == div2View) {
             val heightChanged = bottom - top != oldBottom - oldTop
             if (heightChanged) {
                 val height = convertPixelsToDp(bottom - top, context)
@@ -102,30 +145,8 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     }
 
-    init {
-        layoutParams = LayoutParams(
-            LayoutParams.MATCH_PARENT,
-            LayoutParams.WRAP_CONTENT
-        )
-
-        val contextWrapper = ContextThemeWrapper(context, context.theme)
-
-        divContext =
-            Div2Context(
-                baseContext = contextWrapper,
-                configuration = createDivConfiguration(),
-                lifecycleOwner = appContext.currentActivity as? LifecycleOwner
-            )
-
-        mainView = MainDivView(divContext).apply {
-            layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT
-            )
-        }
-
-        addView(mainView)
-        mainView.addOnLayoutChangeListener(this)
+    private fun convertDpToPixels(dp: Float, context: Context): Int {
+        return (dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 }
 
