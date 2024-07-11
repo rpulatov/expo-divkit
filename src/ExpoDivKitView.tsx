@@ -35,6 +35,12 @@ export function ExpoDivKitView({
 
     setIndexedJson(indexedJson);
     setCustomViews(customViews);
+    /**
+     * Изменение высоты необходимо чтобы принудительно вызвать перерисовку лайаута,
+     * иначе она сама не вызывается.
+     * При перерисовке лайаута будет вызван onHeightChanged и это событие корректно обновит высоту
+     */
+    setRootViewHeight((prev) => (prev > 0 ? prev - 1 : prev + 1));
   };
 
   const onHeightChanged = (e: EventHeightChanged) => {
@@ -56,8 +62,6 @@ export function ExpoDivKitView({
   React.useEffect(() => {
     initialization(json);
   }, [json]);
-
-  console.info({ rootViewHeight, layoutHeight });
 
   return (
     <View style={flex ? { flex: 1 } : undefined} onLayout={onLayoutWrapper}>

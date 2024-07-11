@@ -13,19 +13,38 @@ export function MainPage() {
 
   return (
     <View style={styles.root}>
-      {page === 0 ? <ScrollViewPage /> : <FullscreenViewPage />}
+      {page >= 0 && page < 3 ? (
+        <ScrollViewPage page={page} />
+      ) : (
+        <FullscreenViewPage page={page} />
+      )}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
-          disabled={page === 0}
-          onPress={() => setPage(0)}
+          onPress={() =>
+            setPage((prev) => {
+              if (prev === 0) {
+                return 1;
+              }
+              if (prev === 1) {
+                return 2;
+              }
+              return 0;
+            })
+          }
         >
           <Text style={styles.buttonText}>Scroll page</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          disabled={page === 1}
-          onPress={() => setPage(1)}
+          onPress={() =>
+            setPage((prev) => {
+              if (prev >= 3 && prev <= 7) {
+                return prev + 1;
+              }
+              return 3;
+            })
+          }
         >
           <Text style={styles.buttonText}>Full page</Text>
         </TouchableOpacity>

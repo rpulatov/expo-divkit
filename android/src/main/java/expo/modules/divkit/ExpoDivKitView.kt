@@ -22,8 +22,7 @@ import expo.modules.kotlin.views.ExpoView
 import org.json.JSONObject
 
 @SuppressLint("ViewConstructor")
-class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext),
-    View.OnLayoutChangeListener {
+class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
     private var div2View: Div2View
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
@@ -47,18 +46,19 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         div2View = Div2View(divContext).apply {
             layoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT,
-                2500
+                LayoutParams.WRAP_CONTENT
             )
         }
 
         addView(div2View)
-        div2View.addOnLayoutChangeListener(this)
-
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, MeasureSpec.UNSPECIFIED)
+        val height = convertPixelsToDp(measuredHeight, context)
+        onHeightChanged(mapOf("height" to height))
     }
+
 
     fun setLayoutHeightParam(param: Float) {
         if (param.toInt() == LayoutParams.WRAP_CONTENT || param.toInt() == LayoutParams.MATCH_PARENT) {
@@ -118,26 +118,6 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
             )
-        }
-    }
-
-    override fun onLayoutChange(
-        view: View,
-        left: Int,
-        top: Int,
-        right: Int,
-        bottom: Int,
-        oldLeft: Int,
-        oldTop: Int,
-        oldRight: Int,
-        oldBottom: Int
-    ) {
-        if (view == div2View) {
-            val heightChanged = bottom - top != oldBottom - oldTop
-            if (heightChanged) {
-                val height = convertPixelsToDp(bottom - top, context)
-                onHeightChanged(mapOf("height" to height))
-            }
         }
     }
 
