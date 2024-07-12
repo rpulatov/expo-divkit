@@ -22,16 +22,17 @@ export type CustomViewState = {
   customType: string;
 };
 
-export type EdgeSafeAreaInsets = {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
+export type DivKitVariables = {
+  cardHeight?: number;
+  safeAreaTop?: number;
+  safeAreaRight?: number;
+  safeAreaBottom?: number;
+  safeAreaLeft?: number;
 };
 
 export type ExpoDivKitViewProps = {
   json: DivKitJson;
-  safeAreaInsets?: EdgeSafeAreaInsets;
+  variables?: DivKitVariables;
   flex?: boolean;
 } & React.RefAttributes<View> &
   React.ComponentProps<typeof View>;

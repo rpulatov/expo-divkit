@@ -7,6 +7,7 @@ import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.views.view.ReactViewGroup
 import com.yandex.div.DivDataTag
 import com.yandex.div.core.Div2Context
@@ -22,6 +23,7 @@ import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.viewevent.EventDispatcher
 import expo.modules.kotlin.views.ExpoView
 import org.json.JSONObject
+import java.lang.Exception
 
 @SuppressLint("ViewConstructor")
 class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
@@ -29,6 +31,7 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
     private val divContext: Div2Context
     private val onHeightChanged by EventDispatcher()
 
+    private val cardHeight = Variable.IntegerVariable("cardHeight", 0)
     private val safeAreaTop = Variable.IntegerVariable("safeAreaTop", 0)
     private val safeAreaBottom = Variable.IntegerVariable("safeAreaBottom", 0)
     private val safeAreaLeft = Variable.IntegerVariable("safeAreaLeft", 0)
@@ -44,6 +47,7 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         val contextWrapper = ContextThemeWrapper(context, context.theme)
         val variableController = DivVariableController()
 
+        variableController.putOrUpdate(cardHeight)
         variableController.putOrUpdate(safeAreaTop)
         variableController.putOrUpdate(safeAreaBottom)
         variableController.putOrUpdate(safeAreaLeft)
@@ -81,11 +85,16 @@ class ExpoDivKitView(context: Context, appContext: AppContext) : ExpoView(contex
         }
     }
 
-    fun setSafeAreaInsets(top: Number, bottom: Number, left: Number, right: Number) {
-        safeAreaTop.set(top.toLong())
-        safeAreaBottom.set(bottom.toLong())
-        safeAreaLeft.set(left.toLong())
-        safeAreaRight.set(right.toLong())
+    fun setVariables(variables: ReadableMap? = null) {
+        cardHeight.set(getDoubleVariable(variables,"cardHeight",0).toLong())
+        safeAreaTop.set(getDoubleVariable(variables,"safeAreaTop",0).toLong())
+        safeAreaBottom.set(getDoubleVariable(variables,"safeAreaBottom",0).toLong())
+        safeAreaLeft.set(getDoubleVariable(variables,"safeAreaLeft",0).toLong())
+        safeAreaRight.set(getDoubleVariable(variables,"safeAreaRight",0).toLong())
+    }
+
+    private fun getDoubleVariable(variables: ReadableMap? = null, variable: String, default: Int): Double {
+       return try { variables?.getDouble(variable) ?: default.toDouble() } catch (e: Exception) { default.toDouble() }
     }
 
     private fun createDivConfiguration(variableController: DivVariableController): DivConfiguration {

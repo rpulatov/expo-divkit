@@ -29,7 +29,12 @@ export function FullscreenViewPage({ page }: FullscreenViewPageProps) {
                     ? sameCopy
                     : jsonFile
         }
-        safeAreaInsets={insets}
+        variables={{
+          safeAreaTop: insets.top,
+          safeAreaRight: insets.right,
+          safeAreaBottom: insets.bottom,
+          safeAreaLeft: insets.left,
+        }}
         flex
       />
     </View>

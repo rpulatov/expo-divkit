@@ -3,12 +3,24 @@
     "log_id": "liga_main",
     "states": [
       {
+        "state_id": 0,
         "div": {
           "type": "container",
           "items": [
             {
               "type": "container",
-              "items": [],
+              "items": [
+                {
+                  "type": "current_city",
+                  "cityName": "Красноярск",
+                  "link": "liga://app/citySelection"
+                },
+                {
+                  "type": "current_bonus_account",
+                  "balance": "0",
+                  "link": "liga://app/bonusCardsList"
+                }
+              ],
               "width": {
                 "type": "match_parent"
               },
@@ -86,9 +98,6 @@
                   "height": {
                     "type": "wrap_content"
                   },
-                  "margins": {
-                    "bottom": 28
-                  },
                   "pager_id": "pager_with_indicator",
                   "animation": "worm",
                   "active_shape": {
@@ -131,7 +140,10 @@
                     }
                   }
                 }
-              ]
+              ],
+              "paddings": {
+                "bottom": 14
+              }
             },
             {
               "type": "grid",
@@ -247,12 +259,11 @@
               "height": {
                 "type": "wrap_content"
               },
-              "margins": {
-                "bottom": 24
-              },
               "paddings": {
+                "top": 14,
                 "left": 16,
-                "right": 16
+                "right": 16,
+                "bottom": 12
               },
               "column_count": 2
             },
@@ -260,232 +271,250 @@
               "type": "container",
               "items": [
                 {
-                  "type": "image",
+                  "type": "container",
+                  "items": [
+                    {
+                      "type": "image",
+                      "width": {
+                        "type": "fixed",
+                        "value": 24
+                      },
+                      "height": {
+                        "type": "fixed",
+                        "value": 24
+                      },
+                      "margins": {
+                        "right": 8
+                      },
+                      "image_url": "https://media.roby.market/downloads/liga/resource/map.svg"
+                    },
+                    {
+                      "text": "Ближайшие точки",
+                      "type": "text",
+                      "width": {
+                        "type": "wrap_content"
+                      },
+                      "font_size": 14,
+                      "text_color": "#ffffff",
+                      "font_weight": "bold",
+                      "font_size_unit": "sp"
+                    }
+                  ],
                   "width": {
-                    "type": "fixed",
-                    "value": 24
+                    "type": "match_parent"
+                  },
+                  "border": {
+                    "corner_radius": 30
                   },
                   "height": {
                     "type": "fixed",
-                    "value": 24
+                    "value": 48
                   },
+                  "actions": [
+                    {
+                      "url": "liga://app/divkitPage/9",
+                      "log_id": "button_nearby_kiosks"
+                    },
+                    {
+                      "url": "div-action://animation/fade",
+                      "log_id": "button_nearby_kiosks"
+                    }
+                  ],
                   "margins": {
-                    "right": 8
+                    "left": 16,
+                    "right": 16,
+                    "bottom": 8
                   },
-                  "image_url": "https://media.roby.market/downloads/liga/resource/map.svg"
+                  "background": [
+                    {
+                      "type": "solid",
+                      "color": "#00b800"
+                    }
+                  ],
+                  "orientation": "horizontal",
+                  "action_animation": {
+                    "name": "fade",
+                    "duration": 100,
+                    "end_value": 0.6,
+                    "start_value": 1,
+                    "interpolator": "ease_in_out"
+                  },
+                  "alignment_vertical": "center",
+                  "alignment_horizontal": "left",
+                  "content_alignment_vertical": "center",
+                  "content_alignment_horizontal": "center"
                 },
                 {
-                  "text": "Ближайшие точки",
-                  "type": "text",
+                  "type": "grid",
+                  "items": [
+                    {
+                      "type": "container",
+                      "items": [
+                        {
+                          "text": "Кофе",
+                          "type": "text",
+                          "width": {
+                            "type": "wrap_content"
+                          },
+                          "font_size": 14,
+                          "text_color": "#0099ff",
+                          "font_weight": "bold"
+                        },
+                        {
+                          "type": "image",
+                          "width": {
+                            "type": "fixed",
+                            "value": 24
+                          },
+                          "height": {
+                            "type": "fixed",
+                            "value": 24
+                          },
+                          "margins": {
+                            "left": 8,
+                            "bottom": 1
+                          },
+                          "image_url": "https://media.roby.market/downloads/liga/resource/coffee.svg"
+                        }
+                      ],
+                      "width": {
+                        "type": "match_parent",
+                        "weight": 1
+                      },
+                      "border": {
+                        "corner_radius": 30
+                      },
+                      "height": {
+                        "type": "fixed",
+                        "value": 48
+                      },
+                      "actions": [
+                        {
+                          "url": "liga://app/map?categoryIds=2&categoryIds=3",
+                          "log_id": "button_kiosk_filter_coffee"
+                        },
+                        {
+                          "url": "div-action://animation/fade",
+                          "log_id": "button_kiosk_filter_coffee"
+                        }
+                      ],
+                      "margins": {
+                        "right": 4
+                      },
+                      "background": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "orientation": "horizontal",
+                      "action_animation": {
+                        "name": "fade",
+                        "duration": 100,
+                        "end_value": 0.6,
+                        "start_value": 1,
+                        "interpolator": "ease_in_out"
+                      },
+                      "alignment_vertical": "top",
+                      "alignment_horizontal": "left",
+                      "content_alignment_vertical": "center",
+                      "content_alignment_horizontal": "center"
+                    },
+                    {
+                      "type": "container",
+                      "items": [
+                        {
+                          "text": "@{cardHeight}",
+                          "type": "text",
+                          "width": {
+                            "type": "wrap_content"
+                          },
+                          "font_size": 14,
+                          "text_color": "#0099ff",
+                          "font_weight": "bold"
+                        },
+                        {
+                          "type": "image",
+                          "width": {
+                            "type": "fixed",
+                            "value": 24
+                          },
+                          "height": {
+                            "type": "fixed",
+                            "value": 24
+                          },
+                          "margins": {
+                            "left": 8
+                          },
+                          "image_url": "https://media.roby.market/downloads/liga/resource/food.svg"
+                        }
+                      ],
+                      "width": {
+                        "type": "match_parent",
+                        "weight": 1
+                      },
+                      "border": {
+                        "corner_radius": 30
+                      },
+                      "height": {
+                        "type": "fixed",
+                        "value": 48
+                      },
+                      "actions": [
+                        {
+                          "url": "liga://app/map?categoryIds=1&categoryIds=3",
+                          "log_id": "button_kiosk_filter_food"
+                        },
+                        {
+                          "url": "div-action://animation/fade",
+                          "log_id": "button_kiosk_filter_food"
+                        }
+                      ],
+                      "margins": {
+                        "left": 4
+                      },
+                      "background": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "orientation": "horizontal",
+                      "action_animation": {
+                        "name": "fade",
+                        "duration": 100,
+                        "end_value": 0.6,
+                        "start_value": 1,
+                        "interpolator": "ease_in_out"
+                      },
+                      "alignment_vertical": "top",
+                      "alignment_horizontal": "left",
+                      "content_alignment_vertical": "center",
+                      "content_alignment_horizontal": "center"
+                    }
+                  ],
                   "width": {
-                    "type": "wrap_content"
+                    "type": "match_parent"
                   },
-                  "font_size": 14,
-                  "text_color": "#ffffff",
-                  "font_weight": "bold"
+                  "paddings": {
+                    "left": 16,
+                    "right": 16
+                  },
+                  "column_count": 2
                 }
               ],
               "width": {
                 "type": "match_parent"
-              },
-              "border": {
-                "corner_radius": 30
               },
               "height": {
-                "type": "fixed",
-                "value": 48
-              },
-              "actions": [
-                {
-                  "url": "liga://app/divkitPage/9",
-                  "log_id": "button_nearby_kiosks"
-                },
-                {
-                  "url": "div-action://animation/fade",
-                  "log_id": "button_nearby_kiosks"
-                }
-              ],
-              "margins": {
-                "left": 16,
-                "right": 16,
-                "bottom": 8
-              },
-              "background": [
-                {
-                  "type": "solid",
-                  "color": "#00b800"
-                }
-              ],
-              "orientation": "horizontal",
-              "action_animation": {
-                "name": "fade",
-                "duration": 100,
-                "end_value": 0.6,
-                "start_value": 1,
-                "interpolator": "ease_in_out"
-              },
-              "alignment_vertical": "center",
-              "alignment_horizontal": "left",
-              "content_alignment_vertical": "center",
-              "content_alignment_horizontal": "center"
-            },
-            {
-              "type": "grid",
-              "items": [
-                {
-                  "type": "container",
-                  "items": [
-                    {
-                      "text": "Кофе",
-                      "type": "text",
-                      "width": {
-                        "type": "wrap_content"
-                      },
-                      "font_size": 14,
-                      "text_color": "#0099ff",
-                      "font_weight": "bold"
-                    },
-                    {
-                      "type": "image",
-                      "width": {
-                        "type": "fixed",
-                        "value": 24
-                      },
-                      "height": {
-                        "type": "fixed",
-                        "value": 24
-                      },
-                      "margins": {
-                        "left": 8,
-                        "bottom": 1
-                      },
-                      "image_url": "https://media.roby.market/downloads/liga/resource/coffee.svg"
-                    }
-                  ],
-                  "width": {
-                    "type": "match_parent",
-                    "weight": 1
-                  },
-                  "border": {
-                    "corner_radius": 30
-                  },
-                  "height": {
-                    "type": "fixed",
-                    "value": 48
-                  },
-                  "actions": [
-                    {
-                      "url": "liga://app/map?categoryIds=2&categoryIds=3",
-                      "log_id": "button_kiosk_filter_coffee"
-                    },
-                    {
-                      "url": "div-action://animation/fade",
-                      "log_id": "button_kiosk_filter_coffee"
-                    }
-                  ],
-                  "margins": {
-                    "right": 4
-                  },
-                  "background": [
-                    {
-                      "type": "solid",
-                      "color": "#ffffff"
-                    }
-                  ],
-                  "orientation": "horizontal",
-                  "action_animation": {
-                    "name": "fade",
-                    "duration": 100,
-                    "end_value": 0.6,
-                    "start_value": 1,
-                    "interpolator": "ease_in_out"
-                  },
-                  "alignment_vertical": "top",
-                  "alignment_horizontal": "left",
-                  "content_alignment_vertical": "center",
-                  "content_alignment_horizontal": "center"
-                },
-                {
-                  "type": "container",
-                  "items": [
-                    {
-                      "text": "Еда",
-                      "type": "text",
-                      "width": {
-                        "type": "wrap_content"
-                      },
-                      "font_size": 14,
-                      "text_color": "#0099ff",
-                      "font_weight": "bold"
-                    },
-                    {
-                      "type": "image",
-                      "width": {
-                        "type": "fixed",
-                        "value": 24
-                      },
-                      "height": {
-                        "type": "fixed",
-                        "value": 24
-                      },
-                      "margins": {
-                        "left": 8
-                      },
-                      "image_url": "https://media.roby.market/downloads/liga/resource/food.svg"
-                    }
-                  ],
-                  "width": {
-                    "type": "match_parent",
-                    "weight": 1
-                  },
-                  "border": {
-                    "corner_radius": 30
-                  },
-                  "height": {
-                    "type": "fixed",
-                    "value": 48
-                  },
-                  "actions": [
-                    {
-                      "url": "liga://app/map?categoryIds=1&categoryIds=3",
-                      "log_id": "button_kiosk_filter_food"
-                    },
-                    {
-                      "url": "div-action://animation/fade",
-                      "log_id": "button_kiosk_filter_food"
-                    }
-                  ],
-                  "margins": {
-                    "left": 4
-                  },
-                  "background": [
-                    {
-                      "type": "solid",
-                      "color": "#ffffff"
-                    }
-                  ],
-                  "orientation": "horizontal",
-                  "action_animation": {
-                    "name": "fade",
-                    "duration": 100,
-                    "end_value": 0.6,
-                    "start_value": 1,
-                    "interpolator": "ease_in_out"
-                  },
-                  "alignment_vertical": "top",
-                  "alignment_horizontal": "left",
-                  "content_alignment_vertical": "center",
-                  "content_alignment_horizontal": "center"
-                }
-              ],
-              "width": {
-                "type": "match_parent"
+                "type": "wrap_content"
               },
               "paddings": {
-                "left": 16,
-                "right": 16
+                "top": 12,
+                "bottom": 12
               },
-              "column_count": 2
+              "alignment_vertical": "center",
+              "alignment_horizontal": "center"
             }
           ],
           "height": {
@@ -493,7 +522,7 @@
           },
           "paddings": {
             "top": "@{safeAreaTop}",
-            "bottom": 80
+            "bottom": "@{safeAreaBottom}"
           },
           "background": [
             {
@@ -507,10 +536,9 @@
             }
           ],
           "orientation": "vertical",
-          "content_alignment_vertical": "top",
+          "content_alignment_vertical": "space-around",
           "content_alignment_horizontal": "left"
-        },
-        "state_id": 0
+        }
       }
     ]
   },
@@ -559,6 +587,128 @@
       },
       "alignment_vertical": "center",
       "alignment_horizontal": "center"
+    },
+    "current_city": {
+      "type": "container",
+      "items": [
+        {
+          "type": "image",
+          "width": {
+            "type": "fixed",
+            "value": 16
+          },
+          "height": {
+            "type": "fixed",
+            "value": 16
+          },
+          "margins": {
+            "right": 4
+          },
+          "image_url": "https://media.roby.market/downloads/liga/resource/geo.svg"
+        },
+        {
+          "$text": "cityName",
+          "type": "text",
+          "width": {
+            "type": "wrap_content"
+          },
+          "font_size": 14,
+          "text_color": "#ffffff"
+        }
+      ],
+      "width": {
+        "type": "wrap_content"
+      },
+      "height": {
+        "type": "wrap_content"
+      },
+      "paddings": {
+        "top": 2,
+        "bottom": 2
+      },
+      "orientation": "horizontal",
+      "alignment_vertical": "center",
+      "alignment_horizontal": "left",
+      "actions": [
+        {
+          "log_id": "button_city",
+          "$url": "link"
+        },
+        {
+          "log_id": "scale_button_city",
+          "url": "div-action://animation/fade"
+        }
+      ],
+      "action_animation": {
+        "name": "fade",
+        "start_value": 1,
+        "end_value": 0.6,
+        "duration": 100,
+        "interpolator": "ease_in_out"
+      }
+    },
+    "current_bonus_account": {
+      "type": "container",
+      "items": [
+        {
+          "text": "Бонусы",
+          "type": "text",
+          "width": {
+            "type": "wrap_content"
+          },
+          "margins": {
+            "right": 8
+          },
+          "font_size": 14,
+          "line_height": 14,
+          "font_family": "Rubik",
+          "text_color": "#ffffff"
+        },
+        {
+          "$text": "balance",
+          "type": "text",
+          "width": {
+            "type": "wrap_content"
+          },
+          "paddings": {
+            "bottom": 1
+          },
+          "font_size": 20,
+          "font_family": "Rubik",
+          "line_height": 22,
+          "letter_spacing": 0.15,
+          "text_color": "#ffffff",
+          "font_weight": "bold"
+        }
+      ],
+      "width": {
+        "type": "wrap_content"
+      },
+      "height": {
+        "type": "wrap_content"
+      },
+      "orientation": "horizontal",
+      "alignment_vertical": "top",
+      "alignment_horizontal": "left",
+      "content_alignment_vertical": "center",
+      "content_alignment_horizontal": "center",
+      "actions": [
+        {
+          "log_id": "button_balance",
+          "$url": "link"
+        },
+        {
+          "log_id": "scale_button_balance",
+          "url": "div-action://animation/fade"
+        }
+      ],
+      "action_animation": {
+        "name": "fade",
+        "start_value": 1,
+        "end_value": 0.6,
+        "duration": 100,
+        "interpolator": "ease_in_out"
+      }
     }
   }
 }

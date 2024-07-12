@@ -18,7 +18,13 @@ export function ScrollViewPage({ page }: ScrollViewPageProps) {
     <ScrollView style={styles.container}>
       <ExpoDivKitView
         json={page === 0 ? shimmer : page === 1 ? jsonFile : sameCopy}
-        safeAreaInsets={insets}
+        variables={{
+          safeAreaTop: insets.top,
+          safeAreaRight: insets.right,
+          safeAreaBottom: insets.bottom,
+          safeAreaLeft: insets.left,
+        }}
+        flex
       />
     </ScrollView>
   );

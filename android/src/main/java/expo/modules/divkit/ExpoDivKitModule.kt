@@ -35,16 +35,11 @@ class ExpoDivKitModule : Module() {
                 view.setLayoutHeightParam(layoutHeight)
             }
 
-            Prop("safeAreaInsets") { view: ExpoDivKitView, insets: ReadableMap ->
-                insets?.let {
-                    view.setSafeAreaInsets(
-                        it.getDouble("top") ?: 0,
-                        insets.getDouble("bottom") ?: 0,
-                        insets.getDouble("left") ?: 0,
-                        insets.getDouble("right") ?: 0
-                    )
-                }
+            Prop("variables") { view: ExpoDivKitView, variables: ReadableMap ->
+                view.setVariables(variables)
             }
+
+
         }
     }
 }
