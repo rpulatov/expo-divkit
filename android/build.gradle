@@ -105,9 +105,9 @@ dependencies {
 
   implementation 'com.facebook.react:react-native:'
   
-  implementation 'com.yandex.div:div-core:30.5.0'
-  implementation 'com.yandex.div:div:30.5.0'
-  implementation 'com.yandex.div:div-json:30.5.0'
+  implementation 'com.yandex.div:div-core:30.7.0'
+  implementation 'com.yandex.div:div:30.7.0'
+  implementation 'com.yandex.div:div-json:30.7.0'
 
   implementation 'androidx.core:core-ktx:1.13.1'
   implementation 'androidx.appcompat:appcompat:1.7.0'

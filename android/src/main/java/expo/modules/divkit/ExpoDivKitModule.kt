@@ -1,6 +1,5 @@
 package expo.modules.divkit
 
-import android.view.View
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.UIManagerModule
@@ -15,7 +14,8 @@ class ExpoDivKitModule : Module() {
 
         Function("onCustomViewRendered") { node: Int ->
             val rnContext = appContext.reactContext as? ReactApplicationContext ?: return@Function
-            val uiManager = rnContext.getNativeModule(UIManagerModule::class.java) ?: return@Function
+            val uiManager =
+                rnContext.getNativeModule(UIManagerModule::class.java) ?: return@Function
             appContext.activityProvider?.currentActivity?.runOnUiThread {
                 val view = uiManager.resolveView(node) as ExpoDivKitView
                 view.onCustomViewRendered()
@@ -30,6 +30,16 @@ class ExpoDivKitModule : Module() {
             Prop("json") { view: ExpoDivKitView, json: ReadableMap ->
                 view.updateView(JSONObject(json.toHashMap()))
             }
+
+            Prop("layoutHeight") { view: ExpoDivKitView, layoutHeight: Float ->
+                view.setLayoutHeightParam(layoutHeight)
+            }
+
+            Prop("variables") { view: ExpoDivKitView, variables: ReadableMap ->
+                view.setVariables(variables)
+            }
+
+
         }
     }
 }
