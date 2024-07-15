@@ -39,7 +39,7 @@ export function ExpoDivKitView({
      * иначе она сама не вызывается.
      * При перерисовке лайаута будет вызван onHeightChanged и это событие корректно обновит высоту
      */
-    setRootViewHeight((prev) => (prev > 0 ? prev - 1 : prev + 1));
+    setRootViewHeight((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   const onHeightChanged = (e: EventHeightChanged) => {
@@ -56,6 +56,7 @@ export function ExpoDivKitView({
     setLayoutHeight(
       flex ? e.nativeEvent.layout.height : LayoutParam.WRAP_CONTENT,
     );
+    if (flex) setRootViewHeight(e.nativeEvent.layout.height);
   };
 
   React.useEffect(() => {
